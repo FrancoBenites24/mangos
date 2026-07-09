@@ -277,25 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const initRoomsShowMore = () => {
-      const showMoreBtn = document.getElementById('btn-show-more-rooms');
-      if (!showMoreBtn) return;
 
-      showMoreBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          
-          if (showMoreBtn.classList.contains('expanded')) {
-              showMoreBtn.classList.remove('expanded');
-              showMoreBtn.innerHTML = `Ver Más Habitaciones <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px; vertical-align: middle;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
-          } else {
-              showMoreBtn.classList.add('expanded');
-              showMoreBtn.innerHTML = `Ver Menos Habitaciones <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px; vertical-align: middle;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>`;
-          }
-          filterRooms("all");
-      });
-  };
-
-  initRoomsShowMore();
 
   // Filter pill button clicks
   filterButtons.forEach((btn) => {

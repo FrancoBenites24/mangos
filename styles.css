@@ -39,18 +39,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
     text-size-adjust: 100%;
-}
-
-/* Scroll Snap Snapping Targets */
-#hero,
-#services,
-#rooms,
-#stories,
-#main-footer {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 body {
