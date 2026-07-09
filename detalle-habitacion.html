@@ -1,788 +1,834 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Detalle de Habitación | Mango's Suite Piura</title>
-        <meta
-            name="description"
-            content="Conozca al detalle las comodidades de nuestras suites exclusivas. Jacuzzi, sauna, cama erótica, y cochera privada con portón automático."
-        />
-        <meta name="author" content="Mango's Suite" />
 
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="logo.png" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle de Habitación | Mango's Suite Piura</title>
+    <meta name="description"
+        content="Conozca al detalle las comodidades de nuestras suites exclusivas. Jacuzzi, sauna, cama erótica, y cochera privada con portón automático." />
+    <meta name="author" content="Mango's Suite" />
 
-        <!-- Fonts: Playfair Display for headings & Inter for body -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-            rel="stylesheet"
-        />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png" />
 
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="styles.css" />
-        <style>
-            /* Specific overrides for subpage layout */
-            .detail-page-container {
-                background-color: var(--bg-warm-white);
-                padding: 120px 0 80px 0;
-            }
+    <!-- Fonts: Playfair Display for headings & Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Specific overrides for subpage layout */
+        .detail-page-container {
+            background-color: var(--bg-warm-white);
+            padding: 120px 0 80px 0;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Left Column styles */
+        .detail-gallery {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            box-shadow: 0 15px 35px rgba(7, 21, 48, 0.08);
+            background-color: var(--text-deep-blue);
+            margin-bottom: 30px;
+        }
+
+        .gallery-track {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .gallery-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .gallery-img.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: var(--text-deep-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .gallery-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--white);
+            border-color: var(--accent-gold);
+        }
+
+        .detail-title {
+            font-family: var(--font-headings);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-deep-blue);
+            margin-bottom: 10px;
+        }
+
+        .detail-tag {
+            display: inline-block;
+            background-color: var(--text-deep-blue);
+            color: var(--accent-gold-bright);
+            padding: 4px 12px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold-bright);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .detail-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-muted-blue);
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        /* Amenities subgrid */
+        .detail-amenities-title {
+            font-family: var(--font-headings);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-deep-blue);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .detail-amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .amenity-card {
+            background-color: var(--white);
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(197, 168, 128, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .amenity-icon-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .amenity-card-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .amenity-card-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-deep-blue);
+        }
+
+        .amenity-card-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted-blue);
+            opacity: 0.8;
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        /* Right Column: Sticky Booking Widget */
+        .booking-widget-sticky {
+            position: sticky;
+            top: 110px;
+            background-color: var(--white);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(7, 21, 48, 0.06);
+        }
+
+        .booking-widget-price-box {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .booking-widget-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-deep-blue);
+        }
+
+        .booking-widget-price small {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted-blue);
+        }
+
+        .booking-widget-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .booking-widget-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .booking-widget-field label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-gold-dark);
+        }
+
+        .booking-widget-field input,
+        .booking-widget-field select {
+            padding: 12px 16px;
+            border: 1px solid rgba(7, 21, 48, 0.1);
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            color: var(--text-deep-blue);
+            background-color: var(--white);
+            transition: var(--transition-fast);
+        }
+
+        .booking-widget-field input:focus,
+        .booking-widget-field select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.1);
+        }
+
+        .booking-widget-btn {
+            background-color: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .booking-widget-btn:hover {
+            background-color: var(--accent-gold-bright);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .back-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--accent-gold-dark);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition-fast);
+        }
+
+        .back-link-btn:hover {
+            color: var(--text-deep-blue);
+            transform: translateX(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
             .detail-grid {
-                display: grid;
-                grid-template-columns: 1.4fr 1fr;
-                gap: 50px;
-                align-items: start;
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
-            /* Left Column styles */
+
             .detail-gallery {
-                position: relative;
-                width: 100%;
-                height: 480px;
-                border-radius: 12px;
-                overflow: hidden;
-                border: 1px solid rgba(197, 168, 128, 0.2);
-                box-shadow: 0 15px 35px rgba(7, 21, 48, 0.08);
-                background-color: var(--text-deep-blue);
-                margin-bottom: 30px;
-            }
-            .gallery-track {
-                width: 100%;
-                height: 100%;
-                position: relative;
-            }
-            .gallery-img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                opacity: 0;
-                transition: opacity 0.8s ease-in-out;
-            }
-            .gallery-img.active {
-                opacity: 1;
-                z-index: 2;
-            }
-            .gallery-controls {
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
-                z-index: 10;
-                display: flex;
-                gap: 10px;
-            }
-            .gallery-btn {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(5px);
-                border: 1px solid rgba(197, 168, 128, 0.3);
-                color: var(--text-deep-blue);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: var(--transition-fast);
-            }
-            .gallery-btn:hover {
-                background-color: var(--accent-gold);
-                color: var(--white);
-                border-color: var(--accent-gold);
-            }
-            .detail-title {
-                font-family: var(--font-headings);
-                font-size: 2.5rem;
-                font-weight: 700;
-                color: var(--text-deep-blue);
-                margin-bottom: 10px;
-            }
-            .detail-tag {
-                display: inline-block;
-                background-color: var(--text-deep-blue);
-                color: var(--accent-gold-bright);
-                padding: 4px 12px;
-                font-size: 0.72rem;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                border-radius: 4px;
-                border: 1px solid var(--accent-gold-bright);
-                font-weight: 500;
-                margin-bottom: 20px;
-            }
-            .detail-desc {
-                font-size: 1rem;
-                line-height: 1.7;
-                color: var(--text-muted-blue);
-                font-weight: 300;
-                margin-bottom: 40px;
-            }
-            /* Amenities subgrid */
-            .detail-amenities-title {
-                font-family: var(--font-headings);
-                font-size: 1.6rem;
-                font-weight: 600;
-                color: var(--text-deep-blue);
-                margin-bottom: 20px;
-                border-bottom: 1px solid rgba(197, 168, 128, 0.2);
-                padding-bottom: 10px;
-            }
-            .detail-amenities-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            .amenity-card {
-                background-color: var(--white);
-                padding: 16px 20px;
-                border-radius: 8px;
-                border: 1px solid rgba(197, 168, 128, 0.12);
-                display: flex;
-                align-items: center;
-                gap: 15px;
-            }
-            .amenity-icon-dot {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: var(--accent-gold);
-                flex-shrink: 0;
-            }
-            .amenity-card-info {
-                display: flex;
-                flex-direction: column;
-            }
-            .amenity-card-name {
-                font-size: 0.9rem;
-                font-weight: 600;
-                color: var(--text-deep-blue);
-            }
-            .amenity-card-desc {
-                font-size: 0.78rem;
-                color: var(--text-muted-blue);
-                opacity: 0.8;
-                font-weight: 300;
-                margin-top: 2px;
+                height: 350px;
             }
 
-            /* Right Column: Sticky Booking Widget */
             .booking-widget-sticky {
-                position: sticky;
-                top: 110px;
-                background-color: var(--white);
-                border: 1px solid rgba(197, 168, 128, 0.25);
-                border-radius: 12px;
-                padding: 35px;
-                box-shadow: 0 15px 40px rgba(7, 21, 48, 0.06);
+                position: relative;
+                top: 0;
             }
-            .booking-widget-price-box {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
-                border-bottom: 1px solid rgba(197, 168, 128, 0.15);
-                padding-bottom: 20px;
-                margin-bottom: 25px;
-            }
-            .booking-widget-price {
-                font-size: 2.2rem;
-                font-weight: 700;
-                color: var(--text-deep-blue);
-            }
-            .booking-widget-price small {
-                font-size: 0.85rem;
-                font-weight: 400;
-                color: var(--text-muted-blue);
-            }
-            .booking-widget-form {
-                display: flex;
-                flex-direction: column;
-                gap: 18px;
-            }
-            .booking-widget-field {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-            .booking-widget-field label {
-                font-size: 0.78rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: var(--accent-gold-dark);
-            }
-            .booking-widget-field input,
-            .booking-widget-field select {
-                padding: 12px 16px;
-                border: 1px solid rgba(7, 21, 48, 0.1);
-                border-radius: 6px;
-                font-family: var(--font-body);
-                font-size: 0.9rem;
-                outline: none;
-                color: var(--text-deep-blue);
-                background-color: var(--white);
-                transition: var(--transition-fast);
-            }
-            .booking-widget-field input:focus,
-            .booking-widget-field select:focus {
-                border-color: var(--accent-gold);
-                box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.1);
-            }
-            .booking-widget-btn {
-                background-color: var(--accent-gold);
-                color: var(--white);
-                border: none;
-                padding: 14px;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                cursor: pointer;
-                transition: var(--transition-medium);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 10px;
-                box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
-            }
-            .booking-widget-btn:hover {
-                background-color: var(--accent-gold-bright);
-                box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-                transform: translateY(-1px);
-            }
-            .back-link-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 0.85rem;
-                color: var(--accent-gold-dark);
-                font-weight: 500;
-                margin-bottom: 25px;
-                transition: var(--transition-fast);
-            }
-            .back-link-btn:hover {
-                color: var(--text-deep-blue);
-                transform: translateX(-3px);
+        }
+
+        @media (max-width: 600px) {
+            .detail-amenities-grid {
+                grid-template-columns: 1fr;
             }
 
-            /* Responsive */
-            @media (max-width: 992px) {
-                .detail-grid {
-                    grid-template-columns: 1fr;
-                    gap: 40px;
-                }
-                .detail-gallery {
-                    height: 350px;
-                }
-                .booking-widget-sticky {
-                    position: relative;
-                    top: 0;
-                }
+            .detail-title {
+                font-size: 2rem;
             }
-            @media (max-width: 600px) {
-                .detail-amenities-grid {
-                    grid-template-columns: 1fr;
-                }
-                .detail-title {
-                    font-size: 2rem;
-                }
-            }
-        </style>
-    </head>
-    <body class="subpage-body">
-        <!-- Smooth scroll wrapper -->
-        <div id="scroll-wrapper">
-            <!-- Navigation Bar -->
-            <header id="main-header" class="scrolled">
-                <div class="header-container">
-                    <a href="index.html" class="logo-link">
-                        <img src="logo.png" alt="Mango's Suite Logo" class="nav-logo" />
-                    </a>
+        }
+    </style>
+</head>
 
-                    <nav id="navbar">
-                        <ul class="nav-menu">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.html#services" class="nav-link">Servicios</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="habitaciones.html" class="nav-link active">Habitaciones</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="habitaciones.html?filter=simple">Simple</a></li>
-                                    <li><a href="habitaciones.html?filter=vip">VIP</a></li>
-                                    <li><a href="habitaciones.html?filter=sauna">Sauna & Jacuzzi</a></li>
-                                    <li><a href="habitaciones.html?filter=tematica">Temáticas</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.html#stories" class="nav-link">Historias</a>
-                            </li>
-                        </ul>
-                    </nav>
+<body class="subpage-body">
+    <!-- Smooth scroll wrapper -->
+    <div id="scroll-wrapper">
+        <!-- Navigation Bar -->
+        <header id="main-header" class="scrolled">
+            <div class="header-container">
+                <a href="index.html" class="logo-link">
+                    <img src="logo.png" alt="Mango's Suite Logo" class="nav-logo" />
+                </a>
 
-                    <div class="header-actions">
-                        <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Mobile Drawer Navigation -->
-            <div class="mobile-nav-drawer" id="mobile-drawer">
-                <div class="drawer-header">
-                    <img src="logo.png" alt="Mango's Suite Logo" class="drawer-logo" />
-                    <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">&times;</button>
-                </div>
-                <div class="drawer-menu-container">
-                    <ul class="drawer-menu">
-                        <li><a href="index.html" class="drawer-link">Inicio</a></li>
-                        <li><a href="index.html#services" class="drawer-link">Servicios</a></li>
-                        <li class="drawer-dropdown-container">
-                            <span class="drawer-dropdown-title">Habitaciones</span>
-                            <ul class="drawer-dropdown-menu">
-                                <li><a href="habitaciones.html" class="drawer-link drawer-sublink">Todas</a></li>
-                                <li><a href="habitaciones.html?filter=simple" class="drawer-link drawer-sublink">Simple</a></li>
-                                <li><a href="habitaciones.html?filter=vip" class="drawer-link drawer-sublink">VIP</a></li>
-                                <li><a href="habitaciones.html?filter=sauna" class="drawer-link drawer-sublink">Sauna & Jacuzzi</a></li>
-                                <li><a href="habitaciones.html?filter=tematica" class="drawer-link drawer-sublink">Temáticas</a></li>
+                <nav id="navbar">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#services" class="nav-link">Servicios</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="habitaciones.html" class="nav-link active">Habitaciones</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="habitaciones.html?filter=simple">Simple</a></li>
+                                <li><a href="habitaciones.html?filter=vip">VIP</a></li>
+                                <li><a href="habitaciones.html?filter=sauna">Sauna & Jacuzzi</a></li>
+                                <li><a href="habitaciones.html?filter=tematica">Temáticas</a></li>
                             </ul>
                         </li>
-                        <li><a href="index.html#stories" class="drawer-link">Historias</a></li>
+                        <li class="nav-item">
+                            <a href="index.html#stories" class="nav-link">Historias</a>
+                        </li>
                     </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
                 </div>
             </div>
-            <div class="drawer-overlay" id="mobile-drawer-overlay"></div>
+        </header>
 
-            <!-- Detail Grid Section -->
-            <section class="detail-page-container">
-                <div class="container">
-                    <a href="habitaciones.html" class="back-link-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="19" y1="12" x2="5" y2="12"></line>
-                            <polyline points="12 19 5 12 12 5"></polyline>
-                        </svg>
-                        Volver a Habitaciones
-                    </a>
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-nav-drawer" id="mobile-drawer">
+            <div class="drawer-header">
+                <img src="logo.png" alt="Mango's Suite Logo" class="drawer-logo" />
+                <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">&times;</button>
+            </div>
+            <div class="drawer-menu-container">
+                <ul class="drawer-menu">
+                    <li><a href="index.html" class="drawer-link">Inicio</a></li>
+                    <li><a href="index.html#services" class="drawer-link">Servicios</a></li>
+                    <li class="drawer-dropdown-container">
+                        <span class="drawer-dropdown-title">Habitaciones</span>
+                        <ul class="drawer-dropdown-menu">
+                            <li><a href="habitaciones.html" class="drawer-link drawer-sublink">Todas</a></li>
+                            <li><a href="habitaciones.html?filter=simple" class="drawer-link drawer-sublink">Simple</a>
+                            </li>
+                            <li><a href="habitaciones.html?filter=vip" class="drawer-link drawer-sublink">VIP</a></li>
+                            <li><a href="habitaciones.html?filter=sauna" class="drawer-link drawer-sublink">Sauna &
+                                    Jacuzzi</a></li>
+                            <li><a href="habitaciones.html?filter=tematica"
+                                    class="drawer-link drawer-sublink">Temáticas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#stories" class="drawer-link">Historias</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="drawer-overlay" id="mobile-drawer-overlay"></div>
 
-                    <div class="detail-grid">
-                        <!-- Left Column: Media & Specs -->
-                        <div class="detail-content-col">
-                            <!-- Image Gallery Frame -->
-                            <div class="detail-gallery">
-                                <div class="gallery-track" id="gallery-track-container">
-                                    <!-- Rendered dynamically -->
-                                </div>
-                                <div class="gallery-controls" id="gallery-controls-container">
-                                    <button class="gallery-btn" id="gallery-prev" aria-label="Anterior">&lsaquo;</button>
-                                    <button class="gallery-btn" id="gallery-next" aria-label="Siguiente">&rsaquo;</button>
-                                </div>
-                            </div>
+        <!-- Detail Grid Section -->
+        <section class="detail-page-container">
+            <div class="container">
+                <a href="habitaciones.html" class="back-link-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Volver a Habitaciones
+                </a>
 
-                            <!-- Title & Subtitle Info -->
-                            <span class="detail-tag" id="detail-room-tag">Suite VIP</span>
-                            <h1 class="detail-title" id="detail-room-title">Nombre de la Habitación</h1>
-                            <p class="detail-desc" id="detail-room-desc">Cargando detalles de la habitación...</p>
-
-                            <!-- Amenities Grid -->
-                            <h2 class="detail-amenities-title">Comodidades y Servicios Incluidos</h2>
-                            <div class="detail-amenities-grid" id="detail-amenities-container">
+                <div class="detail-grid">
+                    <!-- Left Column: Media & Specs -->
+                    <div class="detail-content-col">
+                        <!-- Image Gallery Frame -->
+                        <div class="detail-gallery">
+                            <div class="gallery-track" id="gallery-track-container">
                                 <!-- Rendered dynamically -->
                             </div>
+                            <div class="gallery-controls" id="gallery-controls-container">
+                                <button class="gallery-btn" id="gallery-prev" aria-label="Anterior">&lsaquo;</button>
+                                <button class="gallery-btn" id="gallery-next" aria-label="Siguiente">&rsaquo;</button>
+                            </div>
                         </div>
 
-                        <!-- Right Column: Sticky Reservation Box -->
-                        <div class="detail-sidebar-col">
-                            <div class="booking-widget-sticky">
-                                <div class="booking-widget-price-box">
-                                    <span class="booking-widget-price" id="booking-widget-price-val">S/. 00</span>
-                                    <span class="price-label" id="booking-widget-time-val"><small>/ 4 horas</small></span>
+                        <!-- Title & Subtitle Info -->
+                        <span class="detail-tag" id="detail-room-tag">Suite VIP</span>
+                        <h1 class="detail-title" id="detail-room-title">Nombre de la Habitación</h1>
+                        <p class="detail-desc" id="detail-room-desc">Cargando detalles de la habitación...</p>
+
+                        <!-- Amenities Grid -->
+                        <h2 class="detail-amenities-title">Comodidades y Servicios Incluidos</h2>
+                        <div class="detail-amenities-grid" id="detail-amenities-container">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Sticky Reservation Box -->
+                    <div class="detail-sidebar-col">
+                        <div class="booking-widget-sticky">
+                            <div class="booking-widget-price-box">
+                                <span class="booking-widget-price" id="booking-widget-price-val">S/. 00</span>
+                                <span class="price-label" id="booking-widget-time-val"><small>/ 4 horas</small></span>
+                            </div>
+
+                            <div class="booking-widget-form">
+                                <!-- Fecha y Hora de Ingreso -->
+                                <div class="booking-widget-field">
+                                    <label for="widget-datetime">Fecha y Hora de Ingreso</label>
+                                    <input type="datetime-local" id="widget-datetime" required />
                                 </div>
 
-                                <div class="booking-widget-form">
-                                    <!-- Fecha y Hora de Ingreso -->
-                                    <div class="booking-widget-field">
-                                        <label for="widget-datetime">Fecha y Hora de Ingreso</label>
-                                        <input type="datetime-local" id="widget-datetime" required />
-                                    </div>
-
-                                    <!-- Número de Personas -->
-                                    <div class="booking-widget-field">
-                                        <label for="widget-guests">Número de Personas</label>
-                                        <select id="widget-guests">
-                                            <option value="1 persona">1 Persona</option>
-                                            <option value="2 personas" selected>2 Personas</option>
-                                            <option value="3 personas">3 Personas</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Método de Pago -->
-                                    <div class="booking-widget-field">
-                                        <label for="widget-payment">Método de Pago</label>
-                                        <select id="widget-payment">
-                                            <option value="Yape">Yape</option>
-                                            <option value="Plin">Plin</option>
-                                            <option value="Transferencia">Transferencia Bancaria</option>
-                                            <option value="Efectivo/Tarjeta">Efectivo / Tarjeta en el hotel</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Submit WhatsApp Redirect Button -->
-                                    <button class="booking-widget-btn" id="widget-submit-btn">
-                                        Confirmar Reserva vía WhatsApp
-                                    </button>
+                                <!-- Número de Personas -->
+                                <div class="booking-widget-field">
+                                    <label for="widget-guests">Número de Personas</label>
+                                    <select id="widget-guests">
+                                        <option value="1 persona">1 Persona</option>
+                                        <option value="2 personas" selected>2 Personas</option>
+                                        <option value="3 personas">3 Personas</option>
+                                    </select>
                                 </div>
+
+                                <!-- Método de Pago -->
+                                <div class="booking-widget-field">
+                                    <label for="widget-payment">Método de Pago</label>
+                                    <select id="widget-payment">
+                                        <option value="Yape">Yape</option>
+                                        <option value="Plin">Plin</option>
+                                        <option value="Transferencia">Transferencia Bancaria</option>
+                                    </select>
+                                </div>
+
+                                <!-- Submit WhatsApp Redirect Button -->
+                                <button class="booking-widget-btn" id="widget-submit-btn">
+                                    Confirmar Reserva vía WhatsApp
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Footer -->
-            <footer id="main-footer">
-                <div class="container">
-                    <div class="footer-grid">
-                        <div class="footer-nav-col">
-                            <p class="footer-about-summary">
-                                Exclusividad, privacidad y confort contemporáneo en Piura. Un espacio diseñado para la desconexión total, la discreción absoluta y el descanso premium.
-                            </p>
-                            <ul class="footer-quick-links">
-                                <li><a href="index.html#services">Servicios</a></li>
-                                <li><a href="habitaciones.html">Habitaciones</a></li>
-                            </ul>
+        <!-- Footer -->
+        <footer id="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-nav-col">
+                        <p class="footer-about-summary">
+                            Exclusividad, privacidad y confort contemporáneo en Piura. Un espacio diseñado para la
+                            desconexión total, la discreción absoluta y el descanso premium.
+                        </p>
+                        <ul class="footer-quick-links">
+                            <li><a href="index.html#services">Servicios</a></li>
+                            <li><a href="habitaciones.html">Habitaciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-brand-center-col">
+                        <img src="logo.png" alt="Mango's Suite Logo" class="footer-logo-centered" />
+                        <div class="footer-estd-divider">
+                            <div class="estd-line"></div>
+                            <span class="estd-text">MANGOS</span>
+                            <div class="estd-line"></div>
                         </div>
-
-                        <div class="footer-brand-center-col">
-                            <img src="logo.png" alt="Mango's Suite Logo" class="footer-logo-centered" />
-                            <div class="footer-estd-divider">
-                                <div class="estd-line"></div>
-                                <span class="estd-text">MANGOS</span>
-                                <div class="estd-line"></div>
-                            </div>
-                            <div class="footer-social-icons-row">
-                                <a href="https://instagram.com/mangos_suite" target="_blank" rel="noopener" aria-label="Instagram">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg>
-                                </a>
-                                <a href="https://www.facebook.com/MangosSuite" target="_blank" rel="noopener" aria-label="Facebook">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <a href="https://wa.me/51948282961" target="_blank" rel="noopener" class="footer-phone-below-social">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        <div class="footer-social-icons-row">
+                            <a href="https://instagram.com/mangos_suite" target="_blank" rel="noopener"
+                                aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                 </svg>
-                                (+51) 948 282 961
+                            </a>
+                            <a href="https://www.facebook.com/MangosSuite" target="_blank" rel="noopener"
+                                aria-label="Facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                                </svg>
                             </a>
                         </div>
+                        <a href="https://wa.me/51948282961" target="_blank" rel="noopener"
+                            class="footer-phone-below-social">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="color: var(--accent-gold);">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            (+51) 948 282 961
+                        </a>
+                    </div>
 
-                        <div class="footer-contact-right-col">
-                            <div class="footer-map-container">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.529891823126!2d-80.60953532423122!3d-5.14770643412756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904a3fef3c555555%3A0x6bcfd3c11d5dbde5!2sRio%20Seco!5e0!3m2!1ses-419!2spe!4v1783563948011!5m2!1ses-419!2spe"
-                                    width="100%"
-                                    height="120"
-                                    style="border:0; filter: grayscale(0.2) contrast(1.1);"
-                                    allowfullscreen=""
-                                    loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"
-                                ></iframe>
-                            </div>
-                            <div class="footer-contact-item">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
-                                    <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                                <span class="contact-text">Carretera a Río Seco, Castilla, Piura</span>
-                            </div>
+                    <div class="footer-contact-right-col">
+                        <div class="footer-map-container">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.529891823126!2d-80.60953532423122!3d-5.14770643412756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904a3fef3c555555%3A0x6bcfd3c11d5dbde5!2sRio%20Seco!5e0!3m2!1ses-419!2spe!4v1783563948011!5m2!1ses-419!2spe"
+                                width="100%" height="120" style="border:0; filter: grayscale(0.2) contrast(1.1);"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+                                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span class="contact-text">Carretera a Río Seco, Castilla, Piura</span>
                         </div>
                     </div>
-                    <div class="footer-bottom text-center">
-                        <p>&copy; 2026 Mango's Suite. Todos los derechos reservados.</p>
-                    </div>
                 </div>
-            </footer>
-        </div>
+                <div class="footer-bottom text-center">
+                    <p>&copy; 2026 Mango's Suite. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-        <!-- WhatsApp Direct Link -->
-        <div class="floating-actions-container" id="floating-actions">
-            <a href="https://wa.me/51948282961?text=Hola,%20quisiera%20consultar%20por%20habitaciones%20disponibles" target="_blank" rel="noopener" class="floating-whatsapp-trigger" id="whatsapp-trigger" aria-label="Chat de WhatsApp">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.59 2.028 14.108.995 11.993.995c-5.445 0-9.87 4.371-9.874 9.799-.001 1.737.478 3.433 1.388 4.933l-.974 3.553 3.655-.959c1.5.82 3.18 1.25 4.869 1.25zM17.7 14.9c-.3-.15-1.785-.88-2.067-.98-.28-.1-.49-.15-.69.15-.2.3-.77.98-.95 1.18-.18.2-.36.22-.66.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.69-1.67-.95-2.29-.26-.62-.52-.53-.69-.54-.18 0-.38-.02-.59-.02-.2 0-.54.07-.82.38-.28.3-1.08 1.05-1.08 2.57s1.1 2.98 1.25 3.18c.15.2 2.16 3.29 5.23 4.62.73.31 1.3.5 1.74.64.74.23 1.4.2 1.93.12.59-.08 1.79-.73 2.04-1.44.25-.7.25-1.3.18-1.43-.07-.13-.25-.2-.55-.35z" />
-                </svg>
-            </a>
-        </div>
+    <!-- WhatsApp Direct Link -->
+    <div class="floating-actions-container" id="floating-actions">
+        <a href="https://wa.me/51948282961?text=Hola,%20quisiera%20consultar%20por%20habitaciones%20disponibles"
+            target="_blank" rel="noopener" class="floating-whatsapp-trigger" id="whatsapp-trigger"
+            aria-label="Chat de WhatsApp">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.59 2.028 14.108.995 11.993.995c-5.445 0-9.87 4.371-9.874 9.799-.001 1.737.478 3.433 1.388 4.933l-.974 3.553 3.655-.959c1.5.82 3.18 1.25 4.869 1.25zM17.7 14.9c-.3-.15-1.785-.88-2.067-.98-.28-.1-.49-.15-.69.15-.2.3-.77.98-.95 1.18-.18.2-.36.22-.66.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.69-1.67-.95-2.29-.26-.62-.52-.53-.69-.54-.18 0-.38-.02-.59-.02-.2 0-.54.07-.82.38-.28.3-1.08 1.05-1.08 2.57s1.1 2.98 1.25 3.18c.15.2 2.16 3.29 5.23 4.62.73.31 1.3.5 1.74.64.74.23 1.4.2 1.93.12.59-.08 1.79-.73 2.04-1.44.25-.7.25-1.3.18-1.43-.07-.13-.25-.2-.55-.35z" />
+            </svg>
+        </a>
+    </div>
 
-        <!-- GSAP Core -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-        <script>
-            // Rooms Details Dataset
-            const ROOMS_DETAILS = {
-                simple: {
-                    title: "Habitación Simple Standard",
-                    tag: "Simple",
-                    price: "S/. 60",
-                    time: "/ 4 horas",
-                    desc: "Nuestra Habitación Simple Standard ofrece un refugio perfecto para descansar con total comodidad y privacidad en Piura. Cuenta con un diseño contemporáneo y acogedor, pensado para estancias cortas y descansos rápidos. Al igual que todas nuestras habitaciones, incluye acceso directo a su propia cochera privada con portón automático para garantizar la máxima discreción desde su llegada.",
-                    images: [
-                        "assets/images/rooms/room_simple.png",
-                        "assets/images/hero_bg.png"
-                    ],
-                    amenities: [
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Smart TV 55\"", desc: "Netflix, YouTube & cable" },
-                        { name: "Ducha Española", desc: "Agua caliente y fría" },
-                        { name: "Wifi 5G", desc: "Conexión de alta velocidad" },
-                        { name: "Aire Acondicionado", desc: "Control de clima individual" },
-                        { name: "Servicio a la Carta", desc: "Bebidas y piqueos 24h" }
-                    ]
-                },
-                vip: {
-                    title: "Suite VIP Executive",
-                    tag: "VIP",
-                    price: "S/. 90",
-                    time: "/ 4 horas",
-                    desc: "La Suite VIP Executive es la definición de amplitud y confort de alta gama. Diseñada para ocasiones especiales o para quienes buscan una experiencia de nivel superior en Piura. Cuenta con acabados de primera, iluminación cálida indirecta, sistema de sonido de alta fidelidad y un sillón tántrico ergonómico para disfrutar de una estancia memorable con absoluta privacidad.",
-                    images: [
-                        "assets/images/rooms/room_vip.png",
-                        "assets/images/hero_bg.png"
-                    ],
-                    amenities: [
-                        { name: "Jacuzzi Privado", desc: "Espacioso con hidromasaje" },
-                        { name: "Sillón del Amor", desc: "Diseño tántrico ergonómico" },
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Smart TV 65\"", desc: "Pantalla gigante 4K" },
-                        { name: "Sonido Envolvente", desc: "Conexión Bluetooth" },
-                        { name: "Mini Bar", desc: "Bebidas premium seleccionadas" }
-                    ]
-                },
-                sauna: {
-                    title: "Suite Spa Sauna & Jacuzzi",
-                    tag: "Sauna & Jacuzzi",
-                    price: "S/. 130",
-                    time: "/ 4 horas",
-                    desc: "Convierta su estancia en un auténtico día de spa privado. Esta suite exclusiva está equipada con su propia cámara de sauna seco revestida de madera fina y un jacuzzi doble temperado con sistema de hidromasaje. Un espacio de bienestar físico y mental diseñado para parejas que buscan relajación y comodidad premium en la más estricta confidencialidad.",
-                    images: [
-                        "assets/images/services/svc_spa.png",
-                        "assets/images/services/Sauna/1.jpg"
-                    ],
-                    amenities: [
-                        { name: "Sauna Seco", desc: "Madera de primera calidad" },
-                        { name: "Jacuzzi Doble", desc: "Temperado con hidromasajes" },
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Smart Lights", desc: "Escenas de luces relajantes" },
-                        { name: "Smart TV 55\"", desc: "Netflix & YouTube premium" },
-                        { name: "Ventanilla Hermética", desc: "Servicio de comida 100% discreto" }
-                    ]
-                },
-                fantasia: {
-                    title: "Suite Temática Fantasía",
-                    tag: "Temática",
-                    price: "S/. 120",
-                    time: "/ 4 horas",
-                    desc: "Déjese llevar por sus fantasías en una suite concebida para la pasión y la diversión. Cuenta con una cama suspendida de diseño exclusivo, espejos integrados en el techo, un caño o barra de pole dance profesional y un sillón tántrico. Un espacio seguro, higiénico y sugerente pensado para avivar el romance y vivir una noche mágica en Piura.",
-                    images: [
-                        "assets/images/rooms/room_thematic_fantasy.png",
-                        "assets/images/hero_bg.png"
-                    ],
-                    amenities: [
-                        { name: "Cama Suspendida", desc: "Diseño flotante de alta seguridad" },
-                        { name: "Barra Pole Dance", desc: "Profesional y cromada" },
-                        { name: "Espejos en Techo", desc: "Perspectiva única" },
-                        { name: "Sillón del Amor", desc: "Sillón tántrico ergonómico" },
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Smart Lights RGB", desc: "Control de colores por control remoto" }
-                    ]
-                },
-                neonoir: {
-                    title: "Suite Temática Neo-Noir",
-                    tag: "Temática",
-                    price: "S/. 120",
-                    time: "/ 4 horas",
-                    desc: "Sumerja su velada en un ambiente cinematográfico futurista. Inspirada en la estética neo-noir de luces de neón y sombras dramáticas, esta suite cuenta con un proyector de cine de alta definición en la habitación, jacuzzi privado, cochera con portón automático y un control domótico inteligente para configurar la música y las tonalidades de luz a su gusto.",
-                    images: [
-                        "assets/images/rooms/room_thematic_modern.png",
-                        "assets/images/hero_bg.png"
-                    ],
-                    amenities: [
-                        { name: "Luces Inteligentes", desc: "Colores y neón personalizables" },
-                        { name: "Proyector HD", desc: "Cine gigante en cama" },
-                        { name: "Jacuzzi Privado", desc: "Relajación con hidromasaje" },
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Climatización total", desc: "Aire acondicionado silencioso" },
-                        { name: "Sonido Bluetooth", desc: "Conecte sus propios dispositivos" }
-                    ]
-                },
-                matrimonial: {
-                    title: "Suite Matrimonial Premium",
-                    tag: "VIP",
-                    price: "S/. 100",
-                    time: "/ 4 horas",
-                    desc: "El escenario ideal para celebraciones de aniversarios, veladas románticas memorables y noches especiales. Esta suite de primer nivel le ofrece una cama King size sumamente cómoda, un gran jacuzzi redondo temperado con luces integradas, y detalles románticos únicos. Sorprenda a su pareja y disfrute de una noche inolvidable con la total privacidad y el servicio discreto que solo Mango's Suite le ofrece.",
-                    images: [
-                        "assets/images/rooms/room_matrimonial.png",
-                        "assets/images/hero_bg.png"
-                    ],
-                    amenities: [
-                        { name: "Jacuzzi Redondo", desc: "Temperado con luces led" },
-                        { name: "Cama King Size", desc: "Colchón de lujo y confort" },
-                        { name: "Decoración Romántica", desc: "Bajo petición para ocasiones" },
-                        { name: "Sonido Envolvente", desc: "Bluetooth y fidelidad acústica" },
-                        { name: "Cochera Privada", desc: "Portón automático directo" },
-                        { name: "Smart TV 65\"", desc: "Netflix, YouTube y más" }
-                    ]
-                }
-            };
+    <script>
+        // Rooms Details Dataset
+        const ROOMS_DETAILS = {
+            simple: {
+                title: "Habitación Simple Standard",
+                tag: "Simple",
+                price: "S/. 60",
+                time: "/ 4 horas",
+                desc: "Nuestra Habitación Simple Standard ofrece un refugio perfecto para descansar con total comodidad y privacidad en Piura. Cuenta con un diseño contemporáneo y acogedor, pensado para estancias cortas y descansos rápidos. Al igual que todas nuestras habitaciones, incluye acceso directo a su propia cochera privada con portón automático para garantizar la máxima discreción desde su llegada.",
+                images: [
+                    "assets/images/rooms/room_simple.png",
+                    "assets/images/hero_bg.png"
+                ],
+                amenities: [
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Smart TV 55\"", desc: "Netflix, YouTube & cable" },
+                    { name: "Ducha Española", desc: "Agua caliente y fría" },
+                    { name: "Wifi 5G", desc: "Conexión de alta velocidad" },
+                    { name: "Aire Acondicionado", desc: "Control de clima individual" },
+                    { name: "Servicio a la Carta", desc: "Bebidas y piqueos 24h" }
+                ]
+            },
+            vip: {
+                title: "Suite VIP Executive",
+                tag: "VIP",
+                price: "S/. 90",
+                time: "/ 4 horas",
+                desc: "La Suite VIP Executive es la definición de amplitud y confort de alta gama. Diseñada para ocasiones especiales o para quienes buscan una experiencia de nivel superior en Piura. Cuenta con acabados de primera, iluminación cálida indirecta, sistema de sonido de alta fidelidad y un sillón tántrico ergonómico para disfrutar de una estancia memorable con absoluta privacidad.",
+                images: [
+                    "assets/images/rooms/room_vip.png",
+                    "assets/images/hero_bg.png"
+                ],
+                amenities: [
+                    { name: "Jacuzzi Privado", desc: "Espacioso con hidromasaje" },
+                    { name: "Sillón del Amor", desc: "Diseño tántrico ergonómico" },
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Smart TV 65\"", desc: "Pantalla gigante 4K" },
+                    { name: "Sonido Envolvente", desc: "Conexión Bluetooth" },
+                    { name: "Mini Bar", desc: "Bebidas premium seleccionadas" }
+                ]
+            },
+            sauna: {
+                title: "Suite Spa Sauna & Jacuzzi",
+                tag: "Sauna & Jacuzzi",
+                price: "S/. 130",
+                time: "/ 4 horas",
+                desc: "Convierta su estancia en un auténtico día de spa privado. Esta suite exclusiva está equipada con su propia cámara de sauna seco revestida de madera fina y un jacuzzi doble temperado con sistema de hidromasaje. Un espacio de bienestar físico y mental diseñado para parejas que buscan relajación y comodidad premium en la más estricta confidencialidad.",
+                images: [
+                    "assets/images/services/svc_spa.png",
+                    "assets/images/services/Sauna/1.jpg"
+                ],
+                amenities: [
+                    { name: "Sauna Seco", desc: "Madera de primera calidad" },
+                    { name: "Jacuzzi Doble", desc: "Temperado con hidromasajes" },
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Smart Lights", desc: "Escenas de luces relajantes" },
+                    { name: "Smart TV 55\"", desc: "Netflix & YouTube premium" },
+                    { name: "Ventanilla Hermética", desc: "Servicio de comida 100% discreto" }
+                ]
+            },
+            fantasia: {
+                title: "Suite Temática Fantasía",
+                tag: "Temática",
+                price: "S/. 120",
+                time: "/ 4 horas",
+                desc: "Déjese llevar por sus fantasías en una suite concebida para la pasión y la diversión. Cuenta con una cama suspendida de diseño exclusivo, espejos integrados en el techo, un caño o barra de pole dance profesional y un sillón tántrico. Un espacio seguro, higiénico y sugerente pensado para avivar el romance y vivir una noche mágica en Piura.",
+                images: [
+                    "assets/images/rooms/room_thematic_fantasy.png",
+                    "assets/images/hero_bg.png"
+                ],
+                amenities: [
+                    { name: "Cama Suspendida", desc: "Diseño flotante de alta seguridad" },
+                    { name: "Barra Pole Dance", desc: "Profesional y cromada" },
+                    { name: "Espejos en Techo", desc: "Perspectiva única" },
+                    { name: "Sillón del Amor", desc: "Sillón tántrico ergonómico" },
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Smart Lights RGB", desc: "Control de colores por control remoto" }
+                ]
+            },
+            neonoir: {
+                title: "Suite Temática Neo-Noir",
+                tag: "Temática",
+                price: "S/. 120",
+                time: "/ 4 horas",
+                desc: "Sumerja su velada en un ambiente cinematográfico futurista. Inspirada en la estética neo-noir de luces de neón y sombras dramáticas, esta suite cuenta con un proyector de cine de alta definición en la habitación, jacuzzi privado, cochera con portón automático y un control domótico inteligente para configurar la música y las tonalidades de luz a su gusto.",
+                images: [
+                    "assets/images/rooms/room_thematic_modern.png",
+                    "assets/images/hero_bg.png"
+                ],
+                amenities: [
+                    { name: "Luces Inteligentes", desc: "Colores y neón personalizables" },
+                    { name: "Proyector HD", desc: "Cine gigante en cama" },
+                    { name: "Jacuzzi Privado", desc: "Relajación con hidromasaje" },
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Climatización total", desc: "Aire acondicionado silencioso" },
+                    { name: "Sonido Bluetooth", desc: "Conecte sus propios dispositivos" }
+                ]
+            },
+            matrimonial: {
+                title: "Suite Matrimonial Premium",
+                tag: "VIP",
+                price: "S/. 100",
+                time: "/ 4 horas",
+                desc: "El escenario ideal para celebraciones de aniversarios, veladas románticas memorables y noches especiales. Esta suite de primer nivel le ofrece una cama King size sumamente cómoda, un gran jacuzzi redondo temperado con luces integradas, y detalles románticos únicos. Sorprenda a su pareja y disfrute de una noche inolvidable con la total privacidad y el servicio discreto que solo Mango's Suite le ofrece.",
+                images: [
+                    "assets/images/rooms/room_matrimonial.png",
+                    "assets/images/hero_bg.png"
+                ],
+                amenities: [
+                    { name: "Jacuzzi Redondo", desc: "Temperado con luces led" },
+                    { name: "Cama King Size", desc: "Colchón de lujo y confort" },
+                    { name: "Decoración Romántica", desc: "Bajo petición para ocasiones" },
+                    { name: "Sonido Envolvente", desc: "Bluetooth y fidelidad acústica" },
+                    { name: "Cochera Privada", desc: "Portón automático directo" },
+                    { name: "Smart TV 65\"", desc: "Netflix, YouTube y más" }
+                ]
+            }
+        };
 
-            document.addEventListener('DOMContentLoaded', () => {
-                // Mobile Menu Toggle
-                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-                const mobileDrawer = document.getElementById('mobile-drawer');
-                const drawerCloseBtn = document.getElementById('drawer-close-btn');
-                const drawerOverlay = document.getElementById('mobile-drawer-overlay');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const drawerCloseBtn = document.getElementById('drawer-close-btn');
+            const drawerOverlay = document.getElementById('mobile-drawer-overlay');
 
-                if (mobileMenuBtn && mobileDrawer && drawerCloseBtn && drawerOverlay) {
-                    const openDrawer = () => {
-                        mobileDrawer.classList.add('open');
-                        drawerOverlay.classList.add('open');
-                        mobileMenuBtn.classList.add('open');
-                    };
-
-                    const closeDrawer = () => {
-                        mobileDrawer.classList.remove('open');
-                        drawerOverlay.classList.remove('open');
-                        mobileMenuBtn.classList.remove('open');
-                    };
-
-                    mobileMenuBtn.addEventListener('click', () => {
-                        if (mobileDrawer.classList.contains('open')) {
-                            closeDrawer();
-                        } else {
-                            openDrawer();
-                        }
-                    });
-
-                    drawerCloseBtn.addEventListener('click', closeDrawer);
-                    drawerOverlay.addEventListener('click', closeDrawer);
-                }
-
-                // Dynamic Room Data Population
-                const urlParams = new URLSearchParams(window.location.search);
-                const roomKey = urlParams.get('room') || 'vip'; // default fallback is VIP
-                const data = ROOMS_DETAILS[roomKey] || ROOMS_DETAILS['vip'];
-
-                // Populate Text
-                document.getElementById('detail-room-title').textContent = data.title;
-                document.getElementById('detail-room-tag').textContent = data.tag;
-                document.getElementById('detail-room-desc').textContent = data.desc;
-                document.getElementById('booking-widget-price-val').textContent = data.price;
-                document.getElementById('booking-widget-time-val').innerHTML = `<small>${data.time}</small>`;
-
-                // Populate Gallery
-                const galleryTrack = document.getElementById('gallery-track-container');
-                galleryTrack.innerHTML = '';
-                data.images.forEach((imgSrc, index) => {
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.alt = `${data.title} - Foto ${index + 1}`;
-                    img.className = `gallery-img ${index === 0 ? 'active' : ''}`;
-                    galleryTrack.appendChild(img);
-                });
-
-                // Gallery Slide Logic
-                let activeImgIndex = 0;
-                const images = galleryTrack.querySelectorAll('.gallery-img');
-                
-                const showImage = (index) => {
-                    images[activeImgIndex].classList.remove('active');
-                    activeImgIndex = index;
-                    images[activeImgIndex].classList.add('active');
+            if (mobileMenuBtn && mobileDrawer && drawerCloseBtn && drawerOverlay) {
+                const openDrawer = () => {
+                    mobileDrawer.classList.add('open');
+                    drawerOverlay.classList.add('open');
+                    mobileMenuBtn.classList.add('open');
                 };
 
-                const prevBtn = document.getElementById('gallery-prev');
-                const nextBtn = document.getElementById('gallery-next');
+                const closeDrawer = () => {
+                    mobileDrawer.classList.remove('open');
+                    drawerOverlay.classList.remove('open');
+                    mobileMenuBtn.classList.remove('open');
+                };
 
-                if (prevBtn && nextBtn && images.length > 1) {
-                    prevBtn.addEventListener('click', () => {
-                        let newIndex = (activeImgIndex - 1 + images.length) % images.length;
-                        showImage(newIndex);
-                    });
-                    nextBtn.addEventListener('click', () => {
-                        let newIndex = (activeImgIndex + 1) % images.length;
-                        showImage(newIndex);
-                    });
-                } else if (images.length <= 1) {
-                    const controls = document.getElementById('gallery-controls-container');
-                    if (controls) controls.style.display = 'none';
-                }
+                mobileMenuBtn.addEventListener('click', () => {
+                    if (mobileDrawer.classList.contains('open')) {
+                        closeDrawer();
+                    } else {
+                        openDrawer();
+                    }
+                });
 
-                // Populate Amenities
-                const amenitiesContainer = document.getElementById('detail-amenities-container');
-                amenitiesContainer.innerHTML = '';
-                data.amenities.forEach(amenity => {
-                    const card = document.createElement('div');
-                    card.className = 'amenity-card';
-                    card.innerHTML = `
+                drawerCloseBtn.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', closeDrawer);
+            }
+
+            // Dynamic Room Data Population
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomKey = urlParams.get('room') || 'vip'; // default fallback is VIP
+            const data = ROOMS_DETAILS[roomKey] || ROOMS_DETAILS['vip'];
+
+            // Populate Text
+            document.getElementById('detail-room-title').textContent = data.title;
+            document.getElementById('detail-room-tag').textContent = data.tag;
+            document.getElementById('detail-room-desc').textContent = data.desc;
+            document.getElementById('booking-widget-price-val').textContent = data.price;
+            document.getElementById('booking-widget-time-val').innerHTML = `<small>${data.time}</small>`;
+
+            // Populate Gallery
+            const galleryTrack = document.getElementById('gallery-track-container');
+            galleryTrack.innerHTML = '';
+            data.images.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `${data.title} - Foto ${index + 1}`;
+                img.className = `gallery-img ${index === 0 ? 'active' : ''}`;
+                galleryTrack.appendChild(img);
+            });
+
+            // Gallery Slide Logic
+            let activeImgIndex = 0;
+            const images = galleryTrack.querySelectorAll('.gallery-img');
+
+            const showImage = (index) => {
+                images[activeImgIndex].classList.remove('active');
+                activeImgIndex = index;
+                images[activeImgIndex].classList.add('active');
+            };
+
+            const prevBtn = document.getElementById('gallery-prev');
+            const nextBtn = document.getElementById('gallery-next');
+
+            if (prevBtn && nextBtn && images.length > 1) {
+                prevBtn.addEventListener('click', () => {
+                    let newIndex = (activeImgIndex - 1 + images.length) % images.length;
+                    showImage(newIndex);
+                });
+                nextBtn.addEventListener('click', () => {
+                    let newIndex = (activeImgIndex + 1) % images.length;
+                    showImage(newIndex);
+                });
+            } else if (images.length <= 1) {
+                const controls = document.getElementById('gallery-controls-container');
+                if (controls) controls.style.display = 'none';
+            }
+
+            // Populate Amenities
+            const amenitiesContainer = document.getElementById('detail-amenities-container');
+            amenitiesContainer.innerHTML = '';
+            data.amenities.forEach(amenity => {
+                const card = document.createElement('div');
+                card.className = 'amenity-card';
+                card.innerHTML = `
                         <div class="amenity-icon-dot"></div>
                         <div class="amenity-card-info">
                             <span class="amenity-card-name">${amenity.name}</span>
                             <span class="amenity-card-desc">${amenity.desc}</span>
                         </div>
                     `;
-                    amenitiesContainer.appendChild(card);
-                });
-
-                // Set default datetime to tomorrow 18:00
-                const widgetDatetime = document.getElementById('widget-datetime');
-                if (widgetDatetime) {
-                    const tomorrow = new Date();
-                    tomorrow.setDate(tomorrow.getDate() + 1);
-                    tomorrow.setHours(18, 0, 0, 0);
-                    const pad = (num) => String(num).padStart(2, '0');
-                    widgetDatetime.value = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth()+1)}-${pad(tomorrow.getDate())}T18:00`;
-                }
-
-                // Submit reservation WhatsApp handler
-                const submitBtn = document.getElementById('widget-submit-btn');
-                if (submitBtn) {
-                    submitBtn.addEventListener('click', () => {
-                        const datetimeVal = widgetDatetime ? widgetDatetime.value : '';
-                        const guestsSelect = document.getElementById('widget-guests');
-                        const paymentSelect = document.getElementById('widget-payment');
-                        
-                        const guestsVal = guestsSelect ? guestsSelect.value : '';
-                        const paymentVal = paymentSelect ? paymentSelect.value : '';
-
-                        if (!datetimeVal) {
-                            alert('Por favor seleccione una fecha y hora para su reserva.');
-                            return;
-                        }
-
-                        const dateObj = new Date(datetimeVal);
-                        const formattedDate = dateObj.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                        const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-
-                        const message = `Hola, quiero reservar la habitación "${data.title}" para el día ${formattedDate} a las ${formattedTime} para ${guestsVal} (Método de pago: ${paymentVal}).`;
-                        const whatsappUrl = `https://wa.me/511918924237?text=${encodeURIComponent(message)}`;
-                        
-                        window.open(whatsappUrl, '_blank');
-                    });
-                }
+                amenitiesContainer.appendChild(card);
             });
-        </script>
-    </body>
+
+            // Set default datetime to tomorrow 18:00
+            const widgetDatetime = document.getElementById('widget-datetime');
+            if (widgetDatetime) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(18, 0, 0, 0);
+                const pad = (num) => String(num).padStart(2, '0');
+                widgetDatetime.value = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T18:00`;
+            }
+
+            // Submit reservation WhatsApp handler
+            const submitBtn = document.getElementById('widget-submit-btn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    const datetimeVal = widgetDatetime ? widgetDatetime.value : '';
+                    const guestsSelect = document.getElementById('widget-guests');
+                    const paymentSelect = document.getElementById('widget-payment');
+
+                    const guestsVal = guestsSelect ? guestsSelect.value : '';
+                    const paymentVal = paymentSelect ? paymentSelect.value : '';
+
+                    if (!datetimeVal) {
+                        alert('Por favor seleccione una fecha y hora para su reserva.');
+                        return;
+                    }
+
+                    const dateObj = new Date(datetimeVal);
+                    const formattedDate = dateObj.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                    const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+
+                    const message = `Hola, quiero reservar la habitación "${data.title}" para el día ${formattedDate} a las ${formattedTime} para ${guestsVal} (Método de pago: ${paymentVal}).`;
+                    const whatsappUrl = `https://wa.me/511918924237?text=${encodeURIComponent(message)}`;
+
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+
 </html>

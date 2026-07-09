@@ -700,8 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
           desc: "Ingreso directo y discreto a su suite. Portón automático que se abre al instante para garantizar la máxima privacidad desde su llegada. Olvídese de registros públicos y disfrute de una discreción absoluta.",
           images: [
               "assets/images/services/Cochera/1.jpg",
-              "assets/images/services/Cochera/2.jpg",
-              "assets/images/services/Cochera/3.jpg"
+              "assets/images/services/Cochera/2.jpg"
           ]
       },
       sauna: {
@@ -906,6 +905,16 @@ document.addEventListener("DOMContentLoaded", () => {
               bookingBar.classList.remove('contracted');
           }
       });
+
+      // Close button handler (collapses the booking bar back)
+      const closeBtn = document.getElementById('booking-close-btn');
+      if (closeBtn) {
+          closeBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              bookingBar.classList.add('contracted');
+          });
+      }
 
       // Submit handler
       submitBtn.addEventListener('click', (e) => {
