@@ -932,13 +932,16 @@ section {
 
     /* Convert the menu list into a horizontal scrolling row of pills at the top */
     .services-menu-list {
+        display: flex !important;
         flex-direction: row !important;
-        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
         gap: 10px;
         padding-bottom: 12px;
         margin: 0 0 15px 0 !important;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none; /* Hide scrollbar Firefox */
+        width: 100%;
     }
 
     .services-menu-list::-webkit-scrollbar {
@@ -946,6 +949,7 @@ section {
     }
 
     .service-menu-item {
+        flex-shrink: 0 !important;
         padding: 8px 16px !important;
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -1105,6 +1109,28 @@ section {
     font-weight: 600;
     margin-bottom: 12px;
     color: var(--text-deep-blue);
+}
+
+.room-card-link {
+    display: block;
+    overflow: hidden;
+}
+
+.room-title-link {
+    color: var(--text-deep-blue);
+    transition: var(--transition-fast);
+}
+
+.room-title-link:hover {
+    color: var(--accent-gold-dark);
+}
+
+.room-img-hover-trigger {
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.room-card:hover .room-img-hover-trigger {
+    transform: scale(1.06);
 }
 
 .room-desc {
