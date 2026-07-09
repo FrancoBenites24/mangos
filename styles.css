@@ -929,6 +929,10 @@ section {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
 
     /* Convert the menu list into a horizontal scrolling row of pills at the top */
@@ -1906,6 +1910,9 @@ section {
 .booking-close-btn {
     display: none;
 }
+.rooms-carousel-dots {
+    display: none;
+}
 .floating-booking-bar {
     position: fixed;
     bottom: 30px;
@@ -2261,6 +2268,32 @@ section {
 
     .story-quote {
         font-size: 0.82rem;
+    }
+
+    .rooms-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+
+    .rooms-carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(7, 21, 48, 0.2);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+        flex-shrink: 0;
+    }
+
+    .rooms-carousel-dot.active {
+        background-color: var(--accent-gold);
+        transform: scale(1.2);
     }
 }
 

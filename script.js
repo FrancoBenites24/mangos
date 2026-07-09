@@ -956,4 +956,67 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   initFloatingBookingBar();
+
+  // ==========================================================================
+  // 14. Rooms Mobile Carousel Indicator Dots
+  // ==========================================================================
+  const initRoomsCarouselDots = () => {
+      const grid = document.getElementById('rooms-grid-container');
+      const dotsContainer = document.getElementById('rooms-carousel-dots');
+      if (!grid || !dotsContainer) return;
+
+      const updateDots = () => {
+          // Count visible room cards
+          const visibleCards = Array.from(grid.querySelectorAll('.room-card')).filter(card => {
+              return window.getComputedStyle(card).display !== 'none';
+          });
+
+          // Re-render dots if count changed
+          if (dotsContainer.children.length !== visibleCards.length) {
+              dotsContainer.innerHTML = '';
+              visibleCards.forEach((card, index) => {
+                  const dot = document.createElement('button');
+                  dot.className = `rooms-carousel-dot ${index === 0 ? 'active' : ''}`;
+                  dot.setAttribute('aria-label', `Ir a habitación ${index + 1}`);
+                  dot.addEventListener('click', () => {
+                      const cardWidth = card.offsetWidth;
+                      const gap = 20; // grid gap
+                      grid.scrollTo({
+                          left: index * (cardWidth + gap),
+                          behavior: 'smooth'
+                      });
+                  });
+                  dotsContainer.appendChild(dot);
+              });
+          }
+
+          // Highlight active dot based on scroll position
+          const scrollLeft = grid.scrollLeft;
+          if (visibleCards.length > 0) {
+              const cardWidth = visibleCards[0].offsetWidth;
+              const gap = 20;
+              const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+              
+              const dots = dotsContainer.querySelectorAll('.rooms-carousel-dot');
+              dots.forEach((dot, index) => {
+                  if (index === activeIndex) {
+                      dot.classList.add('active');
+                  } else {
+                      dot.classList.remove('active');
+                  }
+              });
+          }
+      };
+
+      grid.addEventListener('scroll', updateDots);
+      window.addEventListener('resize', updateDots);
+
+      // Mutation observer to capture filter updates
+      const observer = new MutationObserver(updateDots);
+      observer.observe(grid, { attributes: true, subtree: true, attributeFilter: ['style', 'class'] });
+
+      updateDots();
+  };
+
+  initRoomsCarouselDots();
 });
