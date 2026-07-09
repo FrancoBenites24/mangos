@@ -213,9 +213,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const roomCards = document.querySelectorAll(".room-card");
 
   const filterRooms = (category) => {
+    const showMoreBtn = document.getElementById('btn-show-more-rooms');
+    const isExpanded = showMoreBtn ? showMoreBtn.classList.contains('expanded') : false;
+
     roomCards.forEach((card) => {
       const roomCat = card.getAttribute("data-category");
-      if (category === "all" || roomCat === category) {
+      const isHiddenRoom = card.classList.contains('hidden-room');
+      
+      const matchesCategory = (category === "all" || roomCat === category);
+      
+      let shouldShow = false;
+      if (matchesCategory) {
+          if (category === "all" && isHiddenRoom && !isExpanded) {
+              shouldShow = false;
+          } else {
+              shouldShow = true;
+          }
+      }
+
+      if (shouldShow) {
+        card.style.display = 'block';
         card.classList.remove("hidden");
 
         // GSAP animation fallback check
@@ -236,9 +253,19 @@ document.addEventListener("DOMContentLoaded", () => {
           card.style.opacity = "1";
         }
       } else {
+        card.style.display = 'none';
         card.classList.add("hidden");
       }
     });
+
+    const moreBtnContainer = document.querySelector('.rooms-more-container');
+    if (moreBtnContainer) {
+        if (category === "all") {
+            moreBtnContainer.style.display = 'block';
+        } else {
+            moreBtnContainer.style.display = 'none';
+        }
+    }
 
     // Highlight active filter pill button
     filterButtons.forEach((btn) => {
@@ -249,6 +276,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
+
+  const initRoomsShowMore = () => {
+      const showMoreBtn = document.getElementById('btn-show-more-rooms');
+      if (!showMoreBtn) return;
+
+      showMoreBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          if (showMoreBtn.classList.contains('expanded')) {
+              showMoreBtn.classList.remove('expanded');
+              showMoreBtn.innerHTML = `Ver Más Habitaciones <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px; vertical-align: middle;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+          } else {
+              showMoreBtn.classList.add('expanded');
+              showMoreBtn.innerHTML = `Ver Menos Habitaciones <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px; vertical-align: middle;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>`;
+          }
+          filterRooms("all");
+      });
+  };
+
+  initRoomsShowMore();
 
   // Filter pill button clicks
   filterButtons.forEach((btn) => {
@@ -578,26 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize ScrollTrigger animations after load
   window.addEventListener("load", initScrollTriggerAnimations);
 
-  // ==========================================================================
-  // 9. Floating WhatsApp Widget Toggle Logic
-  // ==========================================================================
-  const initFloatingWhatsAppWidget = () => {
-    const trigger = document.getElementById("whatsapp-trigger");
-    const widget = document.getElementById("whatsapp-chat-widget");
-    const closeBtn = document.getElementById("whatsapp-widget-close-btn");
 
-    if (!trigger || !widget || !closeBtn) return;
-
-    trigger.addEventListener("click", () => {
-      widget.classList.add("active");
-      trigger.classList.add("hidden");
-    });
-
-    closeBtn.addEventListener("click", () => {
-      widget.classList.remove("active");
-      trigger.classList.remove("hidden");
-    });
-  };
 
 
 
@@ -679,7 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   initHeroSpotlight();
-  initFloatingWhatsAppWidget();
+
 
   // ==========================================================================
   // 12. Services Showcase Interactivo (Bote al Anterior para Lado Izquierdo)

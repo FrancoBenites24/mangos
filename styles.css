@@ -876,20 +876,135 @@ section {
 @media (max-width: 992px) {
     .services-showcase-container {
         grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .services-image-showcase {
-        height: 350px;
-        order: -1; /* Image at the top on mobile */
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        height: 480px; /* Fixed height for the interactive card */
+        border: 1px solid rgba(197, 168, 128, 0.25);
+        box-shadow: 0 15px 35px rgba(7, 21, 48, 0.15);
+        background-color: var(--text-deep-blue);
     }
 
+    /* Move the image showcase to be a absolute background cover */
+    .services-image-showcase {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100% !important;
+        z-index: 1;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    /* Add a dark gradient overlay on top of the background images so text is readable */
+    .services-image-showcase::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(7, 21, 48, 0.4) 0%, rgba(7, 21, 48, 0.85) 100%);
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    /* Set image z-index below the overlay */
+    .showcase-img {
+        z-index: 1;
+    }
+    .showcase-img.active-img {
+        z-index: 2;
+    }
+
+    /* Text and menu float on top of the background */
+    .services-menu-panel {
+        position: relative;
+        z-index: 5;
+        height: 100%;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Convert the menu list into a horizontal scrolling row of pills at the top */
     .services-menu-list {
-        margin-bottom: 30px;
+        flex-direction: row !important;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 12px;
+        margin: 0 0 15px 0 !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+    }
+
+    .services-menu-list::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Chrome/Safari */
+    }
+
+    .service-menu-item {
+        padding: 8px 16px !important;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 30px;
+        white-space: nowrap;
+        border-bottom: none !important;
+        gap: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .service-menu-item::after {
+        display: none !important; /* Remove gold underline on mobile */
+    }
+
+    .service-menu-num {
+        display: none !important; /* Hide number to save space */
     }
 
     .service-menu-name {
-        font-size: 1.25rem;
+        font-size: 0.85rem !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        transform: none !important;
+    }
+
+    /* Highlight active pill */
+    .service-menu-item.active {
+        background-color: var(--accent-gold) !important;
+        border-color: var(--accent-gold) !important;
+    }
+
+    .service-menu-item.active .service-menu-name {
+        color: var(--text-deep-blue) !important;
+        font-weight: 600 !important;
+        transform: none !important;
+    }
+
+    /* Detail Box styling - fits at the bottom */
+    .services-detail-box {
+        margin-top: auto;
+        min-height: auto;
+        background: rgba(7, 21, 48, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .active-service-title {
+        color: var(--white) !important;
+        font-size: 1.3rem !important;
+        margin-bottom: 8px;
+    }
+
+    .active-service-desc {
+        color: rgba(255, 255, 255, 0.88) !important;
+        font-size: 0.85rem !important;
+        line-height: 1.5;
     }
 }
 
@@ -944,6 +1059,12 @@ section {
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(197, 168, 128, 0.1);
     transition: var(--transition-smooth);
+}
+
+.room-card.hidden-room {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .room-image-wrapper {
