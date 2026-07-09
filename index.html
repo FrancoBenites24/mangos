@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mango's Suite | Hotel Boutique & Suites Premium en Piura</title>
+    <meta name="description"
+        content="Descubra Mango's Suite en Piura, un hotel boutique premium concebido para la discreción, comodidad y privacidad absoluta. Habitaciones con sauna privado, jacuzzi y cochera con portón automático." />
+    <meta name="keywords"
+        content="motel piura, mangos suite piura, habitaciones con sauna piura, hotel discreto piura, suites de lujo, jacuzzi, privacidad, rio seco" />
+    <meta name="author" content="Mango's Suite" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mango's Suite | Hotel Boutique & Suites Premium en Piura" />
+    <meta property="og:description"
+        content="Exclusividad, privacidad y confort en un entorno de diseño elegante y contemporáneo en Piura." />
+    <meta property="og:image" content="assets/images/logo.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="logo.webp" />
+
+    <!-- Fonts: Playfair Display for headings & Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Smooth scroll wrapper (Lenis) -->
+    <div id="scroll-wrapper">
+        <!-- Navigation Bar -->
+        <header id="main-header">
+            <div class="header-container">
+                <a href="#hero" class="logo-link" id="nav-logo-link">
+                    <img src="assets/images/logo.webp" alt="Mango's Suite Logo" class="nav-logo" />
+                </a>
+
+                <nav id="navbar">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#hero" class="nav-link active" id="link-inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#services" class="nav-link" id="link-servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#rooms" class="nav-link dropdown-toggle" id="link-habitaciones">
+                                Habitaciones
+                                <svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#rooms" data-filter="simple" class="dropdown-item">Simple</a>
+                                </li>
+                                <li>
+                                    <a href="#rooms" data-filter="vip" class="dropdown-item">VIP</a>
+                                </li>
+                                <li>
+                                    <a href="#rooms" data-filter="sauna" class="dropdown-item">Sauna & Jacuzzi</a>
+                                </li>
+                                <li>
+                                    <a href="#rooms" data-filter="tematica" class="dropdown-item">Temáticas</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#stories" class="nav-link" id="link-historias">Historias</a>
+                        </li>
+                    </ul>
+                    <!-- Slider line for navbar links -->
+                    <div class="nav-underline-slider" id="nav-underline"></div>
+                </nav>
+
+                <div class="header-actions">
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú de navegación">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-nav-drawer" id="mobile-drawer">
+            <div class="drawer-header">
+                <img src="assets/images/logo.webp" alt="Mango's Suite Logo" class="drawer-logo" />
+                <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">
+                    &times;
+                </button>
+            </div>
+            <ul class="drawer-menu">
+                <li><a href="#hero" class="drawer-link">Inicio</a></li>
+                <li>
+                    <a href="#services" class="drawer-link">Servicios</a>
+                </li>
+                <li class="drawer-dropdown-container">
+                    <span class="drawer-dropdown-title">Habitaciones</span>
+                    <ul class="drawer-dropdown-menu">
+                        <li>
+                            <a href="#rooms" data-filter="simple" class="drawer-link drawer-sublink">Simple</a>
+                        </li>
+                        <li>
+                            <a href="#rooms" data-filter="vip" class="drawer-link drawer-sublink">VIP</a>
+                        </li>
+                        <li>
+                            <a href="#rooms" data-filter="sauna" class="drawer-link drawer-sublink">Sauna & Jacuzzi</a>
+                        </li>
+                        <li>
+                            <a href="#rooms" data-filter="tematica" class="drawer-link drawer-sublink">Temáticas</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#stories" class="drawer-link">Historias</a>
+                </li>
+            </ul>
+        </div>
+        <div class="drawer-overlay" id="mobile-drawer-overlay"></div>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section">
+                <!-- Video Background -->
+                <div class="hero-media-wrapper">
+                    <!-- Smooth background video -->
+                    <video autoplay loop muted playsinline class="hero-video" id="hero-background-video">
+                        <source src="assets/Video/hero.mp4" type="video/mp4" />
+                    </video>
+                    <div class="hero-overlay"></div>
+                </div>
+
+                <div class="hero-content-container">
+                    <div class="hero-info-card" id="hero-card">
+                        <span class="hero-subtitle">Suites de Lujo, Discreción & Comodidad</span>
+                        <h1 class="hero-title">
+                            Una Experiencia
+                            <span class="text-gold"><br />más allá de lo ordinario</span>
+                        </h1>
+                        <p class="hero-description">
+                            Un espacio exclusivo en Piura concebido para la
+                            privacidad absoluta, el confort y el descanso en
+                            pareja. Descubra la tranquilidad y exclusividad
+                            de
+                            <span class="typewriter-target" id="typewriter-text"></span>
+                        </p>
+                        <div class="hero-actions">
+                            <a href="https://wa.me/51948282961?text=Hola,%20quiero%20realizar%20una%20reserva"
+                                target="_blank" rel="noopener" class="btn btn-gold" id="hero-btn-book">
+                                Reservar Habitación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="content-overlay-wrapper">
+            <!-- Services Section -->
+            <section id="services" class="services-showcase-section padding-large">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-subtitle">Servicios de Primera</span>
+                        <div class="divider-gold"></div>
+                    </div>
+
+                    <div class="services-showcase-container">
+                        <!-- Left Side: Interactive Menu and Description -->
+                        <div class="services-menu-panel">
+                            <ul class="services-menu-list">
+                                <li class="service-menu-item active" data-service="cocheras">
+                                    <span class="service-menu-num">01</span>
+                                    <span class="service-menu-name">Cocheras Privadas</span>
+                                </li>
+                                <li class="service-menu-item" data-service="sauna">
+                                    <span class="service-menu-num">02</span>
+                                    <span class="service-menu-name">Sauna Seco & Relax</span>
+                                </li>
+                                <li class="service-menu-item" data-service="checkin">
+                                    <span class="service-menu-num">03</span>
+                                    <span class="service-menu-name">Check-in Exclusivo</span>
+                                </li>
+                                <li class="service-menu-item" data-service="discrecion">
+                                    <span class="service-menu-num">04</span>
+                                    <span class="service-menu-name">Discreción Total</span>
+                                </li>
+                                <li class="service-menu-item" data-service="spa">
+                                    <span class="service-menu-num">05</span>
+                                    <span class="service-menu-name">Atención Personalizada</span>
+                                </li>
+                            </ul>
+
+                            <!-- Active Service Detail Text Box -->
+                            <div class="services-detail-box" id="services-detail-box">
+                                <h3 class="active-service-title">Cocheras Privadas con Portón Automático</h3>
+                                <p class="active-service-desc">
+                                    Ingreso directo y discreto a su suite. Portón automático que se abre al instante
+                                    para garantizar la máxima privacidad desde su llegada. Olvídese de registros
+                                    públicos y disfrute de una discreción absoluta.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Big Image Showcase -->
+                        <div class="services-image-showcase">
+                            <div class="showcase-frame">
+                                <div class="showcase-img-container" id="showcase-img-container">
+                                    <!-- Active service images are rendered dynamically here -->
+                                    <img src="assets/images/services/Cochera/1.jpg" alt="Cocheras Privadas"
+                                        class="showcase-img active-img" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rooms Section -->
+            <section id="rooms" class="rooms-section padding-large">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <span class="section-subtitle">Privacidad & Confort</span>
+                        <h2 class="section-title">Habitaciones & Suites Exclusivas</h2>
+                        <div class="divider-gold"></div>
+                        <p class="section-desc">
+                            Seleccione su experiencia ideal. Habitaciones de alta gama con cochera privada, sauna seco y
+                            portón automático para su total discreción en Piura.
+                        </p>
+                    </div>
+
+                    <!-- Room Categories Filter Pills -->
+                    <div class="room-filters">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="simple">Simple</button>
+                        <button class="filter-btn" data-filter="vip">VIP</button>
+                        <button class="filter-btn" data-filter="sauna">Sauna & Jacuzzi</button>
+                        <button class="filter-btn" data-filter="tematica">Temáticas</button>
+                    </div>
+
+                    <!-- Rooms Grid -->
+                    <div class="rooms-grid" id="rooms-grid-container">
+                        <!-- Card 1: Simple -->
+                        <div class="room-card" data-category="simple">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/rooms/room_simple.png" alt="Habitación Simple Standard"
+                                    class="room-img" loading="lazy" />
+                                <span class="room-tag">Simple</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">Simple Standard</h3>
+                                <p class="room-desc">Confort y privacidad insuperables. Diseñada para estancias cortas y
+                                    descansos rápidos con portón automático.</p>
+                                <div class="room-amenities">
+                                    <span>Cochera Privada</span>
+                                    <span>Smart TV 55"</span>
+                                    <span>Ducha Española</span>
+                                    <span>Wifi 5G</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 60 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Habitaci%C3%B3n%20Simple%20Standard"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: VIP -->
+                        <div class="room-card" data-category="vip">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/rooms/room_vip.png" alt="Suite VIP Executive" class="room-img"
+                                    loading="lazy" />
+                                <span class="room-tag">VIP</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">VIP Executive</h3>
+                                <p class="room-desc">Amplitud superior y acabados de lujo. Equipada con sillón tántrico
+                                    y sistema de audio integrado.</p>
+                                <div class="room-amenities">
+                                    <span>Jacuzzi</span>
+                                    <span>Sillón del Amor</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Smart TV 65"</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 90 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Suite%20VIP%20Executive"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Sauna -->
+                        <div class="room-card" data-category="sauna">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/services/svc_spa.png" alt="Suite Spa Sauna & Jacuzzi"
+                                    class="room-img" loading="lazy" />
+                                <span class="room-tag">Sauna & Jacuzzi</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">Spa Sauna & Jacuzzi</h3>
+                                <p class="room-desc">El descanso definitivo. Cuenta con su propia cámara de sauna seco
+                                    de madera fina y jacuzzi temperado.</p>
+                                <div class="room-amenities">
+                                    <span>Sauna Seco</span>
+                                    <span>Jacuzzi Doble</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Smart Lights</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 130 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Suite%20Spa%20Sauna%20%26%20Jacuzzi"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Temática Fantasía -->
+                        <div class="room-card" data-category="tematica">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/rooms/room_thematic_fantasy.png" alt="Suite Temática Fantasía"
+                                    class="room-img" loading="lazy" />
+                                <span class="room-tag">Temática</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">Temática Fantasía</h3>
+                                <p class="room-desc">Deje volar su imaginación en un entorno exclusivo diseñado para
+                                    despertar sus sentidos con cama suspendida.</p>
+                                <div class="room-amenities">
+                                    <span>Cama Suspendida</span>
+                                    <span>Pole Dance</span>
+                                    <span>Espejos Techo</span>
+                                    <span>Luces RGB</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 110 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Suite%20Tem%C3%A1tica%20Fantas%C3%ADa"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Temática Neo-Noir -->
+                        <div class="room-card" data-category="tematica">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/rooms/room_thematic_modern.png" alt="Suite Temática Neo-Noir"
+                                    class="room-img" loading="lazy" />
+                                <span class="room-tag">Temática</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">Temática Neo-Noir</h3>
+                                <p class="room-desc">Diseño vanguardista y sofisticación. Control de iluminación
+                                    domótica inteligente y proyector de cine.</p>
+                                <div class="room-amenities">
+                                    <span>Luces Inteligentes</span>
+                                    <span>Proyector HD</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Jacuzzi</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 120 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Suite%20Tem%C3%A1tica%20Neo-Noir"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Matrimonial Premium -->
+                        <div class="room-card" data-category="vip">
+                            <div class="room-image-wrapper">
+                                <img src="assets/images/rooms/room_matrimonial.png" alt="Suite Matrimonial Premium"
+                                    class="room-img" loading="lazy" />
+                                <span class="room-tag">VIP</span>
+                            </div>
+                            <div class="room-info">
+                                <h3 class="room-title">Matrimonial Premium</h3>
+                                <p class="room-desc">Celebración y elegancia. Diseñada especialmente para veladas
+                                    románticas memorables y aniversarios.</p>
+                                <div class="room-amenities">
+                                    <span>Jacuzzi Redondo</span>
+                                    <span>Decoración Romántica</span>
+                                    <span>Cama King</span>
+                                    <span>Sonido Envolvente</span>
+                                </div>
+                                <div class="room-footer">
+                                    <div class="room-price">
+                                        <span class="price-label">Desde</span>
+                                        <span class="price-val">S/. 100 <small>/ 4 horas</small></span>
+                                    </div>
+                                    <a href="https://wa.me/51948282961?text=Hola,%20deseo%20reservar%20la%20Suite%20Matrimonial%20Premium"
+                                        target="_blank" rel="noopener" class="btn-reservar-bar"
+                                        style="font-size: 0.7rem; padding: 8px 18px;">Reservar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ver Más Button -->
+                    <div class="rooms-more-container text-center">
+                        <p class="rooms-more-text">
+                            ¿Busca una experiencia a medida o quiere consultar disponibilidad en tiempo real?
+                        </p>
+                        <a href="https://wa.me/51948282961?text=Hola,%20quisiera%20consultar%20por%20m%C3%A1s%20opciones%20de%20habitaciones"
+                            target="_blank" rel="noopener" class="btn-gold-outline">
+                            Ver Más Habitaciones
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                style="margin-left: 5px; vertical-align: middle;">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stories Section (Horizontal Carousel) -->
+            <section id="stories" class="stories-section">
+                <div class="container-fluid">
+                    <div class="section-header text-center">
+                        <span class="section-subtitle">Momentos Mango's</span>
+                        <h2 class="section-title">
+                            Historias & Experiencias de Parejas
+                        </h2>
+                        <div class="divider-gold"></div>
+                        <p class="section-desc">
+                            Deslice para explorar los relatos de quienes ya
+                            disfrutaron de la comodidad y discreción en
+                            Piura.
+                        </p>
+                    </div>
+
+                    <!-- Slider Container -->
+                    <div class="stories-carousel-container" id="stories-slider-container">
+                        <!-- Slider Track -->
+                        <div class="stories-track-wrapper" id="stories-track-wrapper">
+                            <div class="stories-slider-track" id="stories-slider-track">
+                                <!-- Card 1 -->
+                                <div class="story-card" data-index="0">
+                                    <div class="story-image-wrapper">
+                                        <img src="assets/images/stories/story1.png"
+                                            alt="Una noche inolvidable en la suite temática" class="story-img"
+                                            loading="lazy" />
+                                    </div>
+                                    <div class="story-card-overlay"></div>
+                                    <div class="story-card-content">
+                                        <div class="story-rating">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                        <p class="story-quote">
+                                            "Buscábamos un fin de semana
+                                            fuera de la rutina en Piura y
+                                            encontramos el lugar perfecto.
+                                            La habitación temática súper
+                                            limpia, luces increíbles y la
+                                            privacidad de ingresar
+                                            directamente con cochera es
+                                            genial."
+                                        </p>
+                                        <div class="story-author">
+                                            <span class="author-name">Sofía & Alejandro</span>
+                                            <span class="author-tag">Huéspedes de la Suite
+                                                Temática</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="story-card" data-index="1">
+                                    <div class="story-image-wrapper">
+                                        <img src="assets/images/stories/story2.png"
+                                            alt="Privacidad y relajación absoluta" class="story-img" loading="lazy" />
+                                    </div>
+                                    <div class="story-card-overlay"></div>
+                                    <div class="story-card-content">
+                                        <div class="story-rating">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                        <p class="story-quote">
+                                            "Excelente servicio. La
+                                            habitación con sauna y jacuzzi
+                                            es increíble para relajarse un
+                                            fin de semana. Todo muy discreto
+                                            y el portón de la cochera abre
+                                            al instante. Volveremos sin
+                                            duda."
+                                        </p>
+                                        <div class="story-author">
+                                            <span class="author-name">Carlos M.</span>
+                                            <span class="author-tag">Huésped Suite Sauna &
+                                                Jacuzzi</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="story-card" data-index="2">
+                                    <div class="story-image-wrapper">
+                                        <img src="assets/images/stories/story_bg.png"
+                                            alt="El diseño moderno y la comodidad del hotel" class="story-img"
+                                            loading="lazy" />
+                                    </div>
+                                    <div class="story-card-overlay"></div>
+                                    <div class="story-card-content">
+                                        <div class="story-rating">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                        <p class="story-quote">
+                                            "El mejor hotel en su categoría
+                                            en Piura. Las habitaciones
+                                            tienen acabados de primera, son
+                                            súper cómodas y discretas. El
+                                            sauna privado de madera funciona
+                                            excelente y todo está muy
+                                            limpio."
+                                        </p>
+                                        <div class="story-author">
+                                            <span class="author-name">Valeria & Diego</span>
+                                            <span class="author-tag">Huéspedes de la Suite
+                                                VIP</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 4 -->
+                                <div class="story-card" data-index="3">
+                                    <div class="story-image-wrapper">
+                                        <img src="assets/images/stories/story1.png"
+                                            alt="Estadía de aniversario en suite de lujo" class="story-img"
+                                            loading="lazy" />
+                                    </div>
+                                    <div class="story-card-overlay"></div>
+                                    <div class="story-card-content">
+                                        <div class="story-rating">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                        <p class="story-quote">
+                                            "Celebramos nuestro aniversario
+                                            y nos encantó. El jacuzzi
+                                            temperado y la privacidad de la
+                                            cochera privada con portón
+                                            eléctrico es justamente lo que
+                                            buscábamos. La atención de
+                                            reservas por WhatsApp es muy
+                                            rápida."
+                                        </p>
+                                        <div class="story-author">
+                                            <span class="author-name">María Fernanda L.</span>
+                                            <span class="author-tag">Aniversario en Suite
+                                                VIP</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 5 -->
+                                <div class="story-card" data-index="4">
+                                    <div class="story-image-wrapper">
+                                        <img src="assets/images/stories/story2.png"
+                                            alt="Excelente escapada romántica de fin de semana" class="story-img"
+                                            loading="lazy" />
+                                    </div>
+                                    <div class="story-card-overlay"></div>
+                                    <div class="story-card-content">
+                                        <div class="story-rating">
+                                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                        </div>
+                                        <p class="story-quote">
+                                            "La suite temática moderna es
+                                            una maravilla. El proyector, el
+                                            jacuzzi doble y el control de
+                                            luces inteligentes te
+                                            desconectan de todo. Ideal para
+                                            una escapada rápida de fin de
+                                            semana en Piura."
+                                        </p>
+                                        <div class="story-author">
+                                            <span class="author-name">Sebastián R.</span>
+                                            <span class="author-tag">Huésped de la Suite
+                                                Moderna</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide dots indicator -->
+                    <div class="carousel-indicators" id="carousel-dots">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="main-footer">
+                <div class="container">
+                    <div class="footer-grid">
+                        <!-- Left Column: Summary and Quick Links -->
+                        <div class="footer-nav-col">
+                            <p class="footer-about-summary">
+                                Exclusividad, privacidad y confort
+                                contemporáneo en Piura. Un espacio diseñado
+                                para la desconexión total, la discreción
+                                absoluta y el descanso premium.
+                            </p>
+                            <ul class="footer-quick-links">
+                                <li><a href="#services">Servicios</a></li>
+                                <li><a href="#rooms">Habitaciones</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Center Column: Centered Brand, Divider, Social Outlines & Phone -->
+                        <div class="footer-brand-center-col">
+                            <div class="footer-estd-divider">
+                                <span class="estd-line"></span>
+                                <img src="assets/images/logo.webp" alt="Mango's Suite Logo"
+                                    class="footer-logo-centered" />
+                                <span class="estd-line"></span>
+                            </div>
+                            <div class="footer-social-icons-row">
+                                <a href="https://www.facebook.com/MangosSuite" target="_blank" rel="noopener"
+                                    aria-label="Facebook">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a href="https://instagram.com/mangos_suite" target="_blank" rel="noopener"
+                                    aria-label="Instagram">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                    </svg>
+                                </a>
+                                <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2a29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                        </path>
+                                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                    </svg>
+                                </a>
+                            </div>
+                            <a href="https://wa.me/51948282961" target="_blank" rel="noopener"
+                                class="footer-phone-below-social">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                                (+51) 948 282 961
+                            </a>
+                        </div>
+
+                        <!-- Right Column: Map and Location info -->
+                        <div class="footer-contact-right-col">
+                            <div class="footer-map-container">
+                                <iframe
+                                    src="https://maps.google.com/maps?q=-5.148504300072169,-80.6101972783284&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                    width="100%" height="130" style="
+                                            border: 0;
+                                            border-radius: 6px;
+                                            filter: grayscale(0.2) contrast(1.1);
+                                        " allowfullscreen="" loading="lazy">
+                                </iframe>
+                            </div>
+                            <div class="footer-contact-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                    class="contact-icon">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span class="contact-text">Carretera a Río Seco, Castilla,
+                                    Piura</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom text-center">
+                        <p>
+                            &copy; 2026 Mango's Suite. Todos los derechos
+                            reservados.
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- End content-overlay-wrapper -->
+    </div>
+    <!-- End scroll wrapper -->
+
+    <!-- Floating Global Actions -->
+
+    <!-- Floating Booking Bar -->
+    <div class="floating-booking-bar" id="floating-booking-bar">
+        <div class="booking-inputs-wrapper" id="booking-inputs-wrapper">
+            <!-- Fecha y Hora Field -->
+            <div class="booking-field">
+                <span class="field-icon-svg-wrapper">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" class="field-icon-svg">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </span>
+                <input type="datetime-local" id="booking-datetime" required />
+            </div>
+            <!-- Tipo de Habitación Field -->
+            <div class="booking-field">
+                <span class="field-icon-svg-wrapper">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" class="field-icon-svg">
+                        <path
+                            d="M3 20v-8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8M2 17h20M2 20h20M22 20v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v5M6 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z">
+                        </path>
+                    </svg>
+                </span>
+                <select id="booking-room-type">
+                    <option value="Simple">Habitación Simple</option>
+                    <option value="VIP">Habitación VIP</option>
+                    <option value="Matrimonial">
+                        Habitación Matrimonial
+                    </option>
+                    <option value="Temática">Habitación Temática</option>
+                </select>
+            </div>
+            <!-- Número de Personas Field -->
+            <div class="booking-field">
+                <span class="field-icon-svg-wrapper">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" class="field-icon-svg">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </span>
+                <select id="booking-guests">
+                    <option value="1 persona">1 Persona</option>
+                    <option value="2 personas" selected>2 Personas</option>
+                    <option value="3 personas">3 Personas</option>
+                </select>
+            </div>
+        </div>
+        <!-- Submit Button (Reservar) -->
+        <button type="button" class="btn-reservar-bar" id="btn-booking-submit">
+            Reservar
+        </button>
+    </div>
+
+    <!-- Dynamic Campaign Floating Badge (Configurable in JS) -->
+    <div id="dynamic-campaign-container">
+        <!-- Rendered by JS if active -->
+    </div>
+
+    <!-- Floating Actions Container (Unified Sidebar/Widgets) -->
+    <div class="floating-actions-container" id="floating-actions">
+        <!-- Instagram Link (Small circle) -->
+        <a href="https://instagram.com/mangos_suite" target="_blank" rel="noopener"
+            class="social-circle-link small-social" id="floating-ig" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+        <!-- Facebook Link (Small circle) -->
+        <a href="https://www.facebook.com/MangosSuite" target="_blank" rel="noopener"
+            class="social-circle-link small-social" id="floating-fb" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+            </svg>
+        </a>
+
+        <!-- WhatsApp Toggle Trigger (Large Button) -->
+        <button class="floating-whatsapp-trigger" id="whatsapp-trigger" aria-label="Abrir chat de WhatsApp">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.59 2.028 14.108.995 11.993.995c-5.445 0-9.87 4.371-9.874 9.799-.001 1.737.478 3.433 1.388 4.933l-.974 3.553 3.655-.959c1.5.82 3.18 1.25 4.869 1.25zM17.7 14.9c-.3-.15-1.785-.88-2.067-.98-.28-.1-.49-.15-.69.15-.2.3-.77.98-.95 1.18-.18.2-.36.22-.66.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.69-1.67-.95-2.29-.26-.62-.52-.53-.69-.54-.18 0-.38-.02-.59-.02-.2 0-.54.07-.82.38-.28.3-1.08 1.05-1.08 2.57s1.1 2.98 1.25 3.18c.15.2 2.16 3.29 5.23 4.62.73.31 1.3.5 1.74.64.74.23 1.4.2 1.93.12.59-.08 1.79-.73 2.04-1.44.25-.7.25-1.3.18-1.43-.07-.13-.25-.2-.55-.35z" />
+            </svg>
+        </button>
+
+        <!-- WhatsApp Chat Widget (Hidden by default) -->
+        <div class="whatsapp-chat-widget" id="whatsapp-chat-widget">
+            <div class="whatsapp-widget-header">
+                <div class="whatsapp-header-info">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="whatsapp-header-icon"
+                        style="color: white">
+                        <path
+                            d="M12 .587c-6.3 0-11.4 5.1-11.4 11.4 0 2 .5 3.9 1.5 5.6l-1.6 5.8 6-1.6c1.6 1 3.5 1.5 5.5 1.5 6.3 0 11.4-5.1 11.4-11.4s-5.1-11.3-11.4-11.3zm6.8 16.2c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.2.2-3.6-.8-2.9-1.2-4.8-4.2-4.9-4.4 0-.1-1.1-1.5-1.1-2.9 0-1.4.7-2.1 1-2.4.3-.3.6-.4.9-.4h.6c.2 0 .4 0 .6.4.2.5.8 2 1.2 2.3.1.2.1.4 0 .6s-.2.3-.4.5c-.2.2-.4.4-.6.6-.2.2-.4.4-.6.6-.2.2-.4.4-.2.7.2.4 1 1.7 2.2 2.8 1.5 1.4 2.8 1.8 3.2 2 .4.2.6.1.8-.1.2-.3 1-1.1 1.2-1.5.2-.4.5-.3.8-.2s1.7.8 2 1c.3.2.5.3.6.4.1.2.1.9-.2 1.7z" />
+                    </svg>
+                    <div class="whatsapp-header-text">
+                        <span class="whatsapp-widget-name">Mango's Suite</span>
+                        <span class="whatsapp-widget-status">En línea</span>
+                    </div>
+                </div>
+                <button class="whatsapp-widget-close" id="whatsapp-widget-close-btn" aria-label="Cerrar chat">
+                    &times;
+                </button>
+            </div>
+            <div class="whatsapp-widget-body">
+                <div class="whatsapp-bubble">
+                    <div class="whatsapp-bubble-msg">
+                        Hey 👋, bienvenido a Mango's Suite.
+                    </div>
+                </div>
+                <div class="whatsapp-bubble">
+                    <div class="whatsapp-bubble-msg">
+                        ¿Cómo podemos ayudarte?
+                    </div>
+                </div>
+                <a href="https://wa.me/51948282961?text=Hola,%20quisiera%20consultar%20por%20habitaciones%20disponibles"
+                    target="_blank" rel="noopener" class="btn btn-whatsapp-widget" id="whatsapp-widget-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                    </svg>
+                    Abrir chat
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Libraries CDNs -->
+
+    <!-- Lenis for smooth scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Project Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
