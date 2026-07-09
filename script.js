@@ -855,6 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const datetimeInput = document.getElementById('booking-datetime');
       const roomTypeSelect = document.getElementById('booking-room-type');
       const guestsSelect = document.getElementById('booking-guests');
+      const paymentSelect = document.getElementById('booking-payment');
 
       if (!bookingBar || !submitBtn) return;
 
@@ -909,6 +910,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const datetimeVal = datetimeInput ? datetimeInput.value : '';
           const roomTypeVal = roomTypeSelect ? roomTypeSelect.value : '';
           const guestsVal = guestsSelect ? guestsSelect.value : '';
+          const paymentVal = paymentSelect ? paymentSelect.value : '';
 
           if (!datetimeVal) {
               alert('Por favor seleccione una fecha y hora para su reserva.');
@@ -924,7 +926,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const formattedDate = dateObj.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
           const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
 
-          const message = `Hola, quiero reservar una habitación ${roomTypeVal} para el día ${formattedDate} a las ${formattedTime} para ${guestsVal}.`;
+          const message = `Hola, quiero reservar una habitación ${roomTypeVal} para el día ${formattedDate} a las ${formattedTime} para ${guestsVal} (Método de pago: ${paymentVal}).`;
           
           // Redirect to the exact phone specified: 511918924237
           // wa.me triggers app redirect on mobile and browser redirection on desktop
