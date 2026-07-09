@@ -260,11 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const moreBtnContainer = document.querySelector('.rooms-more-container');
     if (moreBtnContainer) {
-        if (category === "all") {
-            moreBtnContainer.style.display = 'block';
-        } else {
-            moreBtnContainer.style.display = 'none';
-        }
+        moreBtnContainer.style.display = 'block';
     }
 
     // Highlight active filter pill button
@@ -848,6 +844,33 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       });
 
+      // Swipe gesture detection for mobile:
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const showcaseContainer = document.querySelector('.services-showcase-container');
+      if (showcaseContainer) {
+          showcaseContainer.addEventListener('touchstart', (e) => {
+              touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+          
+          showcaseContainer.addEventListener('touchend', (e) => {
+              touchEndX = e.changedTouches[0].screenX;
+              const threshold = 55;
+              const serviceKeys = Object.keys(SERVICES_DATA);
+              const currentIdx = serviceKeys.indexOf(currentService);
+              
+              if (touchEndX < touchStartX - threshold) {
+                  // Swiped Left -> Next service
+                  const nextIdx = (currentIdx + 1) % serviceKeys.length;
+                  selectService(serviceKeys[nextIdx]);
+              } else if (touchEndX > touchStartX + threshold) {
+                  // Swiped Right -> Previous service
+                  const prevIdx = (currentIdx - 1 + serviceKeys.length) % serviceKeys.length;
+                  selectService(serviceKeys[prevIdx]);
+              }
+          }, { passive: true });
+      }
+
       // Initial setup
       renderImages(currentService);
       startSlideshow(currentService);
@@ -883,6 +906,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // When page leaves the Hero section, contract the bar to show only the Reservar button
       const checkBarScroll = () => {
           const hero = document.getElementById('hero');
+          if (window.innerWidth <= 768) {
+              // Always keep contracted on scroll/load on mobile
+              bookingBar.classList.add('contracted');
+              return;
+          }
           if (hero) {
               const heroHeight = hero.offsetHeight;
               if (window.scrollY > heroHeight - 150) {
@@ -1019,4 +1047,53 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   initRoomsCarouselDots();
+
+  // ==========================================================================
+  // 15. Mystery Reveal Button Logic (Mobile Only)
+  // ==========================================================================
+  const initMysteryButton = () => {
+      const mysteryBtn = document.getElementById('mystery-reveal-btn');
+      const heroCard = document.querySelector('.hero-content-container');
+      const heroCloseBtn = document.getElementById('hero-close-btn');
+
+      if (!mysteryBtn || !heroCard) return;
+
+      mysteryBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          heroCard.classList.add('active-mobile');
+          if (typeof gsap !== 'undefined') {
+              gsap.killTweensOf(heroCard);
+              gsap.fromTo(heroCard, 
+                  { opacity: 0, scale: 0.95 },
+                  { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+              );
+          }
+      });
+
+      if (heroCloseBtn) {
+          heroCloseBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (typeof gsap !== 'undefined') {
+                  gsap.to(heroCard, {
+                      opacity: 0,
+                      scale: 0.95,
+                      duration: 0.3,
+                      ease: "power2.in",
+                      onComplete: () => {
+                          heroCard.classList.remove('active-mobile');
+                      }
+                  });
+              } else {
+                  heroCard.classList.remove('active-mobile');
+              }
+          });
+      }
+  };
+
+  initMysteryButton();
+
+  // Initial filter run to set grid and dots on load
+  filterRooms("all");
 });
