@@ -1053,46 +1053,76 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   const initMysteryButton = () => {
       const mysteryBtn = document.getElementById('mystery-reveal-btn');
-      const heroCard = document.querySelector('.hero-content-container');
-      const heroCloseBtn = document.getElementById('hero-close-btn');
+      const modal = document.getElementById('mystery-modal');
+      const closeBtn = document.getElementById('mystery-modal-close');
 
-      if (!mysteryBtn || !heroCard) return;
+      if (!mysteryBtn || !modal) return;
 
       mysteryBtn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          heroCard.classList.add('active-mobile');
+          modal.classList.add('active');
           if (typeof gsap !== 'undefined') {
-              gsap.killTweensOf(heroCard);
-              gsap.fromTo(heroCard, 
-                  { opacity: 0, scale: 0.95 },
-                  { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
-              );
+              const card = modal.querySelector('.mystery-modal-card');
+              gsap.killTweensOf([modal, card]);
+              gsap.fromTo(modal, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+              gsap.fromTo(card, { scale: 0.85, y: 20 }, { scale: 1, y: 0, duration: 0.4, ease: "back.out(1.2)" });
           }
       });
 
-      if (heroCloseBtn) {
-          heroCloseBtn.addEventListener('click', (e) => {
+      const closeModal = (e) => {
+          if (e) {
               e.preventDefault();
               e.stopPropagation();
-              if (typeof gsap !== 'undefined') {
-                  gsap.to(heroCard, {
-                      opacity: 0,
-                      scale: 0.95,
-                      duration: 0.3,
-                      ease: "power2.in",
-                      onComplete: () => {
-                          heroCard.classList.remove('active-mobile');
-                      }
-                  });
-              } else {
-                  heroCard.classList.remove('active-mobile');
-              }
-          });
+          }
+          if (typeof gsap !== 'undefined') {
+              const card = modal.querySelector('.mystery-modal-card');
+              gsap.to(card, { scale: 0.85, y: 20, duration: 0.25, ease: "power2.in" });
+              gsap.to(modal, {
+                  opacity: 0,
+                  duration: 0.3,
+                  onComplete: () => {
+                      modal.classList.remove('active');
+                  }
+              });
+          } else {
+              modal.classList.remove('active');
+          }
+      };
+
+      if (closeBtn) {
+          closeBtn.addEventListener('click', closeModal);
       }
+
+      modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+              closeModal(e);
+          }
+      });
   };
 
   initMysteryButton();
+
+  // ==========================================================================
+  // 16. Room Cards Flip Animation (Tap to Flip)
+  // ==========================================================================
+  const initRoomCardFlip = () => {
+      const roomCards = document.querySelectorAll('.room-card');
+      roomCards.forEach(card => {
+          card.addEventListener('click', (e) => {
+              // If they clicked the detail link/button, let it navigate normally
+              if (e.target.closest('.btn-detail-back')) {
+                  return;
+              }
+
+              // Otherwise prevent navigation and flip card
+              e.preventDefault();
+              card.classList.toggle('flipped');
+          });
+      });
+  };
+
+  initRoomCardFlip();
 
   // Initial filter run to set grid and dots on load
   filterRooms("all");

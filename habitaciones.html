@@ -10,7 +10,7 @@
     <meta name="author" content="Mango's Suite" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/png" href="logo.webp" />
 
     <!-- Fonts: Playfair Display for headings & Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -90,7 +90,7 @@
         <header id="main-header" class="scrolled">
             <div class="header-container">
                 <a href="index.html" class="logo-link">
-                    <img src="logo.png" alt="Mango's Suite Logo" class="nav-logo" />
+                    <img src="logo.webp" alt="Mango's Suite Logo" class="nav-logo" />
                 </a>
 
                 <nav id="navbar">
@@ -129,7 +129,7 @@
         <!-- Mobile Drawer Navigation -->
         <div class="mobile-nav-drawer" id="mobile-drawer">
             <div class="drawer-header">
-                <img src="logo.png" alt="Mango's Suite Logo" class="drawer-logo" />
+                <img src="logo.webp" alt="Mango's Suite Logo" class="drawer-logo" />
                 <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">&times;</button>
             </div>
             <div class="drawer-menu-container">
@@ -180,197 +180,222 @@
                 <div class="rooms-grid">
                     <!-- Card 1: Simple -->
                     <div class="room-card" data-category="simple">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=simple" class="room-card-link">
-                                <img src="assets/images/rooms/room_simple.png" alt="Habitación Simple Standard"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">Simple</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=simple" class="room-title-link">Simple
-                                    Standard</a>
-                            </h3>
-                            <p class="room-desc">Confort y privacidad insuperables. Diseñada para estancias cortas y
-                                descansos rápidos con portón automático.</p>
-                            <div class="room-amenities">
-                                <span>Cochera Privada</span>
-                                <span>Smart TV 55"</span>
-                                <span>Ducha Española</span>
-                                <span>Wifi 5G</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 60 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/rooms/room_simple.png" alt="Habitación Simple Standard"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">Simple</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=simple" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">Simple Standard</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 60 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=simple" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">Simple Standard</h3>
+                                <p class="room-desc-back">Confort y privacidad insuperables. Diseñada para estancias cortas y descansos rápidos con portón automático.</p>
+                                <div class="room-amenities-back">
+                                    <span>Cochera Privada</span>
+                                    <span>Smart TV 55"</span>
+                                    <span>Ducha Española</span>
+                                    <span>Wifi 5G</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 2: VIP -->
                     <div class="room-card" data-category="vip">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=vip" class="room-card-link">
-                                <img src="assets/images/rooms/room_vip.png" alt="Suite VIP Executive"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">VIP</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=vip" class="room-title-link">VIP Executive</a>
-                            </h3>
-                            <p class="room-desc">Amplitud superior y acabados de lujo. Equipada con sillón tántrico y
-                                sistema de audio integrado.</p>
-                            <div class="room-amenities">
-                                <span>Jacuzzi</span>
-                                <span>Sillón del Amor</span>
-                                <span>Cochera Privada</span>
-                                <span>Smart TV 65"</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 90 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/rooms/room_vip.png" alt="Suite VIP Executive"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">VIP</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=vip" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">VIP Executive</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 90 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=vip" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">VIP Executive</h3>
+                                <p class="room-desc-back">Amplitud superior y acabados de lujo. Equipada con sillón tántrico y sistema de audio integrado.</p>
+                                <div class="room-amenities-back">
+                                    <span>Jacuzzi</span>
+                                    <span>Sillón del Amor</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Smart TV 65"</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 3: Sauna -->
                     <div class="room-card" data-category="sauna">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=sauna" class="room-card-link">
-                                <img src="assets/images/services/svc_spa.png" alt="Suite Spa Sauna & Jacuzzi"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">Sauna & Jacuzzi</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=sauna" class="room-title-link">Spa Sauna &
-                                    Jacuzzi</a>
-                            </h3>
-                            <p class="room-desc">El descanso definitivo. Cuenta con su propia cámara de sauna seco de
-                                madera fina y jacuzzi temperado.</p>
-                            <div class="room-amenities">
-                                <span>Sauna Seco</span>
-                                <span>Jacuzzi Doble</span>
-                                <span>Cochera Privada</span>
-                                <span>Smart Lights</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 130 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/services/svc_spa.png" alt="Suite Spa Sauna & Jacuzzi"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">Sauna & Jacuzzi</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=sauna" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">Spa Sauna & Jacuzzi</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 130 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=sauna" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">Spa Sauna & Jacuzzi</h3>
+                                <p class="room-desc-back">El descanso definitivo. Cuenta con su propia cámara de sauna seco de madera fina y jacuzzi temperado.</p>
+                                <div class="room-amenities-back">
+                                    <span>Sauna Seco</span>
+                                    <span>Jacuzzi Doble</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Smart Lights</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 4: Temática Fantasía -->
                     <div class="room-card" data-category="tematica">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=fantasia" class="room-card-link">
-                                <img src="assets/images/rooms/room_thematic_fantasy.png" alt="Suite Temática Fantasía"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">Temática</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=fantasia" class="room-title-link">Temática
-                                    Fantasía</a>
-                            </h3>
-                            <p class="room-desc">Cama suspendida y diseño erótico de vanguardia. Espejos en techo,
-                                iluminación LED inteligente y barra de pole dance.</p>
-                            <div class="room-amenities">
-                                <span>Cama Suspendida</span>
-                                <span>Barra Pole Dance</span>
-                                <span>Cochera Privada</span>
-                                <span>Sillón del Amor</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 120 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/rooms/room_thematic_fantasy.png" alt="Suite Temática Fantasía"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">Temática</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=fantasia" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">Temática Fantasía</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 120 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=fantasia" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">Temática Fantasía</h3>
+                                <p class="room-desc-back">Cama suspendida y diseño erótico de vanguardia. Espejos en techo, iluminación LED inteligente y barra de pole dance.</p>
+                                <div class="room-amenities-back">
+                                    <span>Cama Suspendida</span>
+                                    <span>Barra Pole Dance</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Sillón del Amor</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 5: Temática Neo-Noir -->
                     <div class="room-card" data-category="tematica">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=neonoir" class="room-card-link">
-                                <img src="assets/images/rooms/room_thematic_modern.png" alt="Suite Temática Neo-Noir"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">Temática</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=neonoir" class="room-title-link">Temática
-                                    Neo-Noir</a>
-                            </h3>
-                            <p class="room-desc">Diseño vanguardista y sofisticación. Control de iluminación domótica
-                                inteligente y proyector de cine.</p>
-                            <div class="room-amenities">
-                                <span>Luces Inteligentes</span>
-                                <span>Proyector HD</span>
-                                <span>Cochera Privada</span>
-                                <span>Jacuzzi</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 120 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/rooms/room_thematic_modern.png" alt="Suite Temática Neo-Noir"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">Temática</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=neonoir" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">Temática Neo-Noir</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 120 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=neonoir" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">Temática Neo-Noir</h3>
+                                <p class="room-desc-back">Diseño vanguardista y sofisticación. Control de iluminación domótica inteligente y proyector de cine.</p>
+                                <div class="room-amenities-back">
+                                    <span>Luces Inteligentes</span>
+                                    <span>Proyector HD</span>
+                                    <span>Cochera Privada</span>
+                                    <span>Jacuzzi</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 6: Matrimonial Premium -->
                     <div class="room-card" data-category="vip">
-                        <div class="room-image-wrapper">
-                            <a href="detalle-habitacion.html?room=matrimonial" class="room-card-link">
-                                <img src="assets/images/rooms/room_matrimonial.png" alt="Suite Matrimonial Premium"
-                                    class="room-img room-img-hover-trigger" loading="lazy" />
-                            </a>
-                            <span class="room-tag">VIP</span>
-                        </div>
-                        <div class="room-info">
-                            <h3 class="room-title">
-                                <a href="detalle-habitacion.html?room=matrimonial" class="room-title-link">Matrimonial
-                                    Premium</a>
-                            </h3>
-                            <p class="room-desc">Celebración y elegancia. Diseñada especialmente para veladas románticas
-                                memorables y aniversarios.</p>
-                            <div class="room-amenities">
-                                <span>Jacuzzi Redondo</span>
-                                <span>Decoración Romántica</span>
-                                <span>Cama King</span>
-                                <span>Sonido Envolvente</span>
-                            </div>
-                            <div class="room-footer">
-                                <div class="room-price">
-                                    <span class="price-label">Desde</span>
-                                    <span class="price-val">S/. 100 <small>/ 4 horas</small></span>
+                        <div class="room-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="room-card-front">
+                                <div class="room-image-wrapper">
+                                    <img src="assets/images/rooms/room_matrimonial.png" alt="Suite Matrimonial Premium"
+                                        class="room-img" loading="lazy" />
+                                    <span class="room-tag">VIP</span>
                                 </div>
-                                <a href="detalle-habitacion.html?room=matrimonial" class="btn btn-gold"
-                                    style="font-size: 0.75rem; padding: 10px 20px;">Ver Detalle</a>
+                                <div class="room-info-front">
+                                    <h3 class="room-title">Matrimonial Premium</h3>
+                                    <div class="room-footer-front">
+                                        <div class="room-price">
+                                            <span class="price-label">Desde</span>
+                                            <span class="price-val">S/. 100 <small>/ 4 horas</small></span>
+                                        </div>
+                                        <a href="detalle-habitacion.html?room=matrimonial" class="btn-detail-back">Ver Detalle</a>
+                                    </div>
+                                    <div class="room-flip-indicator">Ver especificaciones ✧</div>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE -->
+                            <div class="room-card-back">
+                                <h3 class="room-title-back">Matrimonial Premium</h3>
+                                <p class="room-desc-back">Celebración y elegancia. Diseñada especialmente para veladas románticas memorables y aniversarios.</p>
+                                <div class="room-amenities-back">
+                                    <span>Jacuzzi Redondo</span>
+                                    <span>Decoración Romántica</span>
+                                    <span>Cama King</span>
+                                    <span>Sonido Envolvente</span>
+                                </div>
+                                <div class="room-flip-indicator-back">Volver ✧</div>
                             </div>
                         </div>
                     </div>
@@ -396,7 +421,7 @@
                     </div>
 
                     <div class="footer-brand-center-col">
-                        <img src="logo.png" alt="Mango's Suite Logo" class="footer-logo-centered" />
+                        <img src="logo.webp" alt="Mango's Suite Logo" class="footer-logo-centered" />
                         <div class="footer-estd-divider">
                             <div class="estd-line"></div>
                             <span class="estd-text">MANGOS</span>
@@ -550,6 +575,21 @@
             if (defaultFilter) {
                 filterRooms(defaultFilter);
             }
+
+            // Tap/click to flip room cards
+            const initRoomCardFlip = () => {
+                const roomCards = document.querySelectorAll('.room-card');
+                roomCards.forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        if (e.target.closest('.btn-detail-back')) {
+                            return;
+                        }
+                        e.preventDefault();
+                        card.classList.toggle('flipped');
+                    });
+                });
+            };
+            initRoomCardFlip();
 
             // Initialize indicator dots for mobile carousel
             const initRoomsCarouselDots = () => {

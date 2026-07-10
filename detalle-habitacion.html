@@ -10,7 +10,7 @@
     <meta name="author" content="Mango's Suite" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/png" href="logo.webp" />
 
     <!-- Fonts: Playfair Display for headings & Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -130,26 +130,69 @@
             margin-bottom: 40px;
         }
 
-        /* Amenities subgrid */
-        .detail-amenities-title {
+        /* Collapsible Amenities Accordion in Sidebar */
+        .detail-amenities-accordion {
+            margin-top: 25px;
+            background: var(--white);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(7, 21, 48, 0.05);
+        }
+
+        .amenities-accordion-toggle {
+            width: 100%;
+            padding: 16px 20px;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-family: var(--font-headings);
-            font-size: 1.6rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-deep-blue);
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
-            padding-bottom: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+
+        .amenities-accordion-toggle:hover {
+            background-color: rgba(197, 168, 128, 0.05);
+        }
+
+        .accordion-arrow {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-amenities-accordion.open .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        .amenities-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: var(--bg-warm-white);
+        }
+
+        .detail-amenities-accordion.open .amenities-accordion-content {
+            max-height: 800px;
+            border-top: 1px solid rgba(197, 168, 128, 0.15);
         }
 
         .detail-amenities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px;
         }
 
         .amenity-card {
             background-color: var(--white);
-            padding: 16px 20px;
+            padding: 12px 16px;
             border-radius: 8px;
             border: 1px solid rgba(197, 168, 128, 0.12);
             display: flex;
@@ -158,8 +201,8 @@
         }
 
         .amenity-icon-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background-color: var(--accent-gold);
             flex-shrink: 0;
@@ -171,13 +214,13 @@
         }
 
         .amenity-card-name {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             color: var(--text-deep-blue);
         }
 
         .amenity-card-desc {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-muted-blue);
             opacity: 0.8;
             font-weight: 300;
@@ -333,7 +376,7 @@
         <header id="main-header" class="scrolled">
             <div class="header-container">
                 <a href="index.html" class="logo-link">
-                    <img src="logo.png" alt="Mango's Suite Logo" class="nav-logo" />
+                    <img src="logo.webp" alt="Mango's Suite Logo" class="nav-logo" />
                 </a>
 
                 <nav id="navbar">
@@ -372,7 +415,7 @@
         <!-- Mobile Drawer Navigation -->
         <div class="mobile-nav-drawer" id="mobile-drawer">
             <div class="drawer-header">
-                <img src="logo.png" alt="Mango's Suite Logo" class="drawer-logo" />
+                <img src="logo.webp" alt="Mango's Suite Logo" class="drawer-logo" />
                 <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar menú">&times;</button>
             </div>
             <div class="drawer-menu-container">
@@ -429,11 +472,7 @@
                         <h1 class="detail-title" id="detail-room-title">Nombre de la Habitación</h1>
                         <p class="detail-desc" id="detail-room-desc">Cargando detalles de la habitación...</p>
 
-                        <!-- Amenities Grid -->
-                        <h2 class="detail-amenities-title">Comodidades y Servicios Incluidos</h2>
-                        <div class="detail-amenities-grid" id="detail-amenities-container">
-                            <!-- Rendered dynamically -->
-                        </div>
+
                     </div>
 
                     <!-- Right Column: Sticky Reservation Box -->
@@ -477,6 +516,19 @@
                                 </button>
                             </div>
                         </div>
+
+                        <!-- Collapsible Amenities & Services Accordion -->
+                        <div class="detail-amenities-accordion">
+                            <button class="amenities-accordion-toggle" id="amenities-toggle-btn">
+                                <span>Comodidades y Servicios Incluidos</span>
+                                <span class="accordion-arrow">▼</span>
+                            </button>
+                            <div class="amenities-accordion-content" id="amenities-content-pane">
+                                <div class="detail-amenities-grid" id="detail-amenities-container">
+                                    <!-- Rendered dynamically -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -498,7 +550,7 @@
                     </div>
 
                     <div class="footer-brand-center-col">
-                        <img src="logo.png" alt="Mango's Suite Logo" class="footer-logo-centered" />
+                        <img src="logo.webp" alt="Mango's Suite Logo" class="footer-logo-centered" />
                         <div class="footer-estd-divider">
                             <div class="estd-line"></div>
                             <span class="estd-text">MANGOS</span>
@@ -825,6 +877,15 @@
                     const whatsappUrl = `https://wa.me/511918924237?text=${encodeURIComponent(message)}`;
 
                     window.open(whatsappUrl, '_blank');
+                });
+            }
+
+            // Toggle Collapsible Amenities Accordion
+            const amenitiesToggle = document.getElementById('amenities-toggle-btn');
+            const amenitiesAccordion = document.querySelector('.detail-amenities-accordion');
+            if (amenitiesToggle && amenitiesAccordion) {
+                amenitiesToggle.addEventListener('click', () => {
+                    amenitiesAccordion.classList.toggle('open');
                 });
             }
         });
