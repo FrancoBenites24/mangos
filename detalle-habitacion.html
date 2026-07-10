@@ -227,10 +227,18 @@
             margin-top: 2px;
         }
 
-        /* Right Column: Sticky Booking Widget */
-        .booking-widget-sticky {
+        /* Right Column: Sticky Sidebar Column */
+        .detail-sidebar-col {
             position: sticky;
             top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 90;
+        }
+
+        .booking-widget-sticky {
+            position: relative;
             background-color: var(--bg-card);
             border: 1px solid rgba(197, 168, 128, 0.25);
             border-radius: 12px;
@@ -303,10 +311,12 @@
                 transform: scale(1);
                 box-shadow: 0 4px 12px rgba(176, 26, 51, 0.35);
             }
+
             50% {
                 transform: scale(1.04);
                 box-shadow: 0 8px 25px rgba(214, 34, 70, 0.7);
             }
+
             100% {
                 transform: scale(1);
                 box-shadow: 0 4px 12px rgba(176, 26, 51, 0.35);
@@ -367,7 +377,7 @@
                 height: 350px;
             }
 
-            .booking-widget-sticky {
+            .detail-sidebar-col {
                 position: relative;
                 top: 0;
             }
@@ -422,11 +432,13 @@
                     <!-- Theme Toggle Switch -->
                     <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Cambiar tema (Claro / Oscuro)">
                         <!-- Moon icon for dark mode selection -->
-                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                         <!-- Sun icon for light mode selection -->
-                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="5"></circle>
                             <line x1="12" y1="1" x2="12" y2="3"></line>
                             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -661,271 +673,8 @@
 
     <!-- GSAP Core -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <script>
-        // Rooms Details Dataset
-        const ROOMS_DETAILS = {
-            simple: {
-                title: "Habitación Simple Standard",
-                tag: "Simple",
-                price: "S/. 60",
-                time: "/ 4 horas",
-                desc: "Nuestra Habitación Simple Standard ofrece un refugio perfecto para descansar con total comodidad y privacidad en Piura. Cuenta con un diseño contemporáneo y acogedor, pensado para estancias cortas y descansos rápidos. Al igual que todas nuestras habitaciones, incluye acceso directo a su propia cochera privada con portón automático para garantizar la máxima discreción desde su llegada.",
-                images: [
-                    "assets/images/rooms/room_simple.png",
-                    "assets/images/hero_bg.png"
-                ],
-                amenities: [
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Smart TV 55\"", desc: "Netflix, YouTube & cable" },
-                    { name: "Ducha Española", desc: "Agua caliente y fría" },
-                    { name: "Wifi 5G", desc: "Conexión de alta velocidad" },
-                    { name: "Aire Acondicionado", desc: "Control de clima individual" },
-                    { name: "Servicio a la Carta", desc: "Bebidas y piqueos 24h" }
-                ]
-            },
-            vip: {
-                title: "Suite VIP Executive",
-                tag: "VIP",
-                price: "S/. 90",
-                time: "/ 4 horas",
-                desc: "La Suite VIP Executive es la definición de amplitud y confort de alta gama. Diseñada para ocasiones especiales o para quienes buscan una experiencia de nivel superior en Piura. Cuenta con acabados de primera, iluminación cálida indirecta, sistema de sonido de alta fidelidad y un sillón tántrico ergonómico para disfrutar de una estancia memorable con absoluta privacidad.",
-                images: [
-                    "assets/images/rooms/room_vip.png",
-                    "assets/images/hero_bg.png"
-                ],
-                amenities: [
-                    { name: "Jacuzzi Privado", desc: "Espacioso con hidromasaje" },
-                    { name: "Sillón del Amor", desc: "Diseño tántrico ergonómico" },
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Smart TV 65\"", desc: "Pantalla gigante 4K" },
-                    { name: "Sonido Envolvente", desc: "Conexión Bluetooth" },
-                    { name: "Mini Bar", desc: "Bebidas premium seleccionadas" }
-                ]
-            },
-            sauna: {
-                title: "Suite Spa Sauna & Jacuzzi",
-                tag: "Sauna & Jacuzzi",
-                price: "S/. 130",
-                time: "/ 4 horas",
-                desc: "Convierta su estancia en un auténtico día de spa privado. Esta suite exclusiva está equipada con su propia cámara de sauna seco revestida de madera fina y un jacuzzi doble temperado con sistema de hidromasaje. Un espacio de bienestar físico y mental diseñado para parejas que buscan relajación y comodidad premium en la más estricta confidencialidad.",
-                images: [
-                    "assets/images/services/svc_spa.png",
-                    "assets/images/services/Sauna/1.jpg"
-                ],
-                amenities: [
-                    { name: "Sauna Seco", desc: "Madera de primera calidad" },
-                    { name: "Jacuzzi Doble", desc: "Temperado con hidromasajes" },
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Smart Lights", desc: "Escenas de luces relajantes" },
-                    { name: "Smart TV 55\"", desc: "Netflix & YouTube premium" },
-                    { name: "Ventanilla Hermética", desc: "Servicio de comida 100% discreto" }
-                ]
-            },
-            fantasia: {
-                title: "Suite Temática Fantasía",
-                tag: "Temática",
-                price: "S/. 120",
-                time: "/ 4 horas",
-                desc: "Déjese llevar por sus fantasías en una suite concebida para la pasión y la diversión. Cuenta con una cama suspendida de diseño exclusivo, espejos integrados en el techo, un caño o barra de pole dance profesional y un sillón tántrico. Un espacio seguro, higiénico y sugerente pensado para avivar el romance y vivir una noche mágica en Piura.",
-                images: [
-                    "assets/images/rooms/room_thematic_fantasy.png",
-                    "assets/images/hero_bg.png"
-                ],
-                amenities: [
-                    { name: "Cama Suspendida", desc: "Diseño flotante de alta seguridad" },
-                    { name: "Barra Pole Dance", desc: "Profesional y cromada" },
-                    { name: "Espejos en Techo", desc: "Perspectiva única" },
-                    { name: "Sillón del Amor", desc: "Sillón tántrico ergonómico" },
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Smart Lights RGB", desc: "Control de colores por control remoto" }
-                ]
-            },
-            neonoir: {
-                title: "Suite Temática Neo-Noir",
-                tag: "Temática",
-                price: "S/. 120",
-                time: "/ 4 horas",
-                desc: "Sumerja su velada en un ambiente cinematográfico futurista. Inspirada en la estética neo-noir de luces de neón y sombras dramáticas, esta suite cuenta con un proyector de cine de alta definición en la habitación, jacuzzi privado, cochera con portón automático y un control domótico inteligente para configurar la música y las tonalidades de luz a su gusto.",
-                images: [
-                    "assets/images/rooms/room_thematic_modern.png",
-                    "assets/images/hero_bg.png"
-                ],
-                amenities: [
-                    { name: "Luces Inteligentes", desc: "Colores y neón personalizables" },
-                    { name: "Proyector HD", desc: "Cine gigante en cama" },
-                    { name: "Jacuzzi Privado", desc: "Relajación con hidromasaje" },
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Climatización total", desc: "Aire acondicionado silencioso" },
-                    { name: "Sonido Bluetooth", desc: "Conecte sus propios dispositivos" }
-                ]
-            },
-            matrimonial: {
-                title: "Suite Matrimonial Premium",
-                tag: "VIP",
-                price: "S/. 100",
-                time: "/ 4 horas",
-                desc: "El escenario ideal para celebraciones de aniversarios, veladas románticas memorables y noches especiales. Esta suite de primer nivel le ofrece una cama King size sumamente cómoda, un gran jacuzzi redondo temperado con luces integradas, y detalles románticos únicos. Sorprenda a su pareja y disfrute de una noche inolvidable con la total privacidad y el servicio discreto que solo Mango's Suite le ofrece.",
-                images: [
-                    "assets/images/rooms/room_matrimonial.png",
-                    "assets/images/hero_bg.png"
-                ],
-                amenities: [
-                    { name: "Jacuzzi Redondo", desc: "Temperado con luces led" },
-                    { name: "Cama King Size", desc: "Colchón de lujo y confort" },
-                    { name: "Decoración Romántica", desc: "Bajo petición para ocasiones" },
-                    { name: "Sonido Envolvente", desc: "Bluetooth y fidelidad acústica" },
-                    { name: "Cochera Privada", desc: "Portón automático directo" },
-                    { name: "Smart TV 65\"", desc: "Netflix, YouTube y más" }
-                ]
-            }
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileDrawer = document.getElementById('mobile-drawer');
-            const drawerCloseBtn = document.getElementById('drawer-close-btn');
-            const drawerOverlay = document.getElementById('mobile-drawer-overlay');
-
-            if (mobileMenuBtn && mobileDrawer && drawerCloseBtn && drawerOverlay) {
-                const openDrawer = () => {
-                    mobileDrawer.classList.add('open');
-                    drawerOverlay.classList.add('open');
-                    mobileMenuBtn.classList.add('open');
-                };
-
-                const closeDrawer = () => {
-                    mobileDrawer.classList.remove('open');
-                    drawerOverlay.classList.remove('open');
-                    mobileMenuBtn.classList.remove('open');
-                };
-
-                mobileMenuBtn.addEventListener('click', () => {
-                    if (mobileDrawer.classList.contains('open')) {
-                        closeDrawer();
-                    } else {
-                        openDrawer();
-                    }
-                });
-
-                drawerCloseBtn.addEventListener('click', closeDrawer);
-                drawerOverlay.addEventListener('click', closeDrawer);
-            }
-
-            // Dynamic Room Data Population
-            const urlParams = new URLSearchParams(window.location.search);
-            const roomKey = urlParams.get('room') || 'vip'; // default fallback is VIP
-            const data = ROOMS_DETAILS[roomKey] || ROOMS_DETAILS['vip'];
-
-            // Populate Text
-            document.getElementById('detail-room-title').textContent = data.title;
-            document.getElementById('detail-room-tag').textContent = data.tag;
-            document.getElementById('detail-room-desc').textContent = data.desc;
-            document.getElementById('booking-widget-price-val').textContent = data.price;
-            document.getElementById('booking-widget-time-val').innerHTML = `<small>${data.time}</small>`;
-
-            // Populate Gallery
-            const galleryTrack = document.getElementById('gallery-track-container');
-            galleryTrack.innerHTML = '';
-            data.images.forEach((imgSrc, index) => {
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = `${data.title} - Foto ${index + 1}`;
-                img.className = `gallery-img ${index === 0 ? 'active' : ''}`;
-                galleryTrack.appendChild(img);
-            });
-
-            // Gallery Slide Logic
-            let activeImgIndex = 0;
-            const images = galleryTrack.querySelectorAll('.gallery-img');
-
-            const showImage = (index) => {
-                images[activeImgIndex].classList.remove('active');
-                activeImgIndex = index;
-                images[activeImgIndex].classList.add('active');
-            };
-
-            const prevBtn = document.getElementById('gallery-prev');
-            const nextBtn = document.getElementById('gallery-next');
-
-            if (prevBtn && nextBtn && images.length > 1) {
-                prevBtn.addEventListener('click', () => {
-                    let newIndex = (activeImgIndex - 1 + images.length) % images.length;
-                    showImage(newIndex);
-                });
-                nextBtn.addEventListener('click', () => {
-                    let newIndex = (activeImgIndex + 1) % images.length;
-                    showImage(newIndex);
-                });
-            } else if (images.length <= 1) {
-                const controls = document.getElementById('gallery-controls-container');
-                if (controls) controls.style.display = 'none';
-            }
-
-            // Populate Amenities
-            const amenitiesContainer = document.getElementById('detail-amenities-container');
-            amenitiesContainer.innerHTML = '';
-            data.amenities.forEach(amenity => {
-                const card = document.createElement('div');
-                card.className = 'amenity-card';
-                card.innerHTML = `
-                        <div class="amenity-icon-dot"></div>
-                        <div class="amenity-card-info">
-                            <span class="amenity-card-name">${amenity.name}</span>
-                            <span class="amenity-card-desc">${amenity.desc}</span>
-                        </div>
-                    `;
-                amenitiesContainer.appendChild(card);
-            });
-
-            // Set default datetime to tomorrow 18:00
-            const widgetDatetime = document.getElementById('widget-datetime');
-            if (widgetDatetime) {
-                const tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(18, 0, 0, 0);
-                const pad = (num) => String(num).padStart(2, '0');
-                widgetDatetime.value = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T18:00`;
-            }
-
-            // Submit reservation WhatsApp handler
-            const submitBtn = document.getElementById('widget-submit-btn');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', () => {
-                    const datetimeVal = widgetDatetime ? widgetDatetime.value : '';
-                    const guestsSelect = document.getElementById('widget-guests');
-                    const paymentSelect = document.getElementById('widget-payment');
-
-                    const guestsVal = guestsSelect ? guestsSelect.value : '';
-                    const paymentVal = paymentSelect ? paymentSelect.value : '';
-
-                    if (!datetimeVal) {
-                        alert('Por favor seleccione una fecha y hora para su reserva.');
-                        return;
-                    }
-
-                    const dateObj = new Date(datetimeVal);
-                    const formattedDate = dateObj.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                    const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-
-                    const message = `Hola, quiero reservar la habitación "${data.title}" para el día ${formattedDate} a las ${formattedTime} para ${guestsVal} (Método de pago: ${paymentVal}).`;
-                    const whatsappUrl = `https://wa.me/511918924237?text=${encodeURIComponent(message)}`;
-
-                    window.open(whatsappUrl, '_blank');
-                });
-            }
-
-            // Toggle Collapsible Amenities Accordion
-            const amenitiesToggle = document.getElementById('amenities-toggle-btn');
-            const amenitiesAccordion = document.querySelector('.detail-amenities-accordion');
-            if (amenitiesToggle && amenitiesAccordion) {
-                amenitiesToggle.addEventListener('click', () => {
-                    amenitiesAccordion.classList.toggle('open');
-                });
-            }
-        });
-    </script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/room-detail-page.js"></script>
 </body>
 
 </html>

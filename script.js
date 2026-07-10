@@ -4,26 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 0. Theme Toggle Switcher (Default: Dark Mode, Selectable: Light Mode)
   // ==========================================================================
-  const initThemeToggle = () => {
-      const toggleBtn = document.getElementById('theme-toggle-btn');
-      if (!toggleBtn) return;
-
-      // Check for saved theme preference, default is dark (no class)
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-          document.body.classList.add('light-theme');
-      }
-
-      toggleBtn.addEventListener('click', () => {
-          document.body.classList.toggle('light-theme');
-          if (document.body.classList.contains('light-theme')) {
-              localStorage.setItem('theme', 'light');
-          } else {
-              localStorage.setItem('theme', 'dark');
-          }
-      });
-  };
-  initThemeToggle();
+  MangosUI.initThemeToggle();
+  MangosUI.initResponsiveHeroVideo();
 
   // ==========================================================================
   // 1. Lenis Smooth Scroll Configuration (Safe Guarded) - Disabled for Native CSS Scroll Snapping
@@ -113,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 4. Navbar Interactions (Underline Slide, Header Scrolled, Section Tracker)
   // ==========================================================================
+  let closeMobileMenu = () => {};
   const mainHeader = document.getElementById("main-header");
   const navbar = document.getElementById("navbar");
   const navLinks = document.querySelectorAll(".nav-link");
@@ -199,113 +182,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 5. Mobile Drawer Navigation Menu
   // ==========================================================================
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileDrawer = document.getElementById("mobile-drawer");
-  const drawerCloseBtn = document.getElementById("drawer-close-btn");
-  const drawerOverlay = document.getElementById("mobile-drawer-overlay");
-  const drawerLinks = document.querySelectorAll(".drawer-link");
-
-  const openMobileMenu = () => {
-    mobileMenuBtn.classList.add("open");
-    mobileDrawer.classList.add("open");
-    drawerOverlay.classList.add("open");
-    if (lenisInstance) lenisInstance.stop(); // Stop scroll when drawer is open
-  };
-
-  const closeMobileMenu = () => {
-    mobileMenuBtn.classList.remove("open");
-    mobileDrawer.classList.remove("open");
-    drawerOverlay.classList.remove("open");
-    if (lenisInstance) lenisInstance.start(); // Resume scroll
-  };
-
-  if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMobileMenu);
-  if (drawerCloseBtn) drawerCloseBtn.addEventListener("click", closeMobileMenu);
-  if (drawerOverlay) drawerOverlay.addEventListener("click", closeMobileMenu);
-
-  drawerLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      // Allow default navigation, close menu
-      closeMobileMenu();
-    });
-  });
+  ({ close: closeMobileMenu } = MangosUI.initMobileDrawer({
+    onOpen: () => {
+      if (lenisInstance) lenisInstance.stop();
+    },
+    onClose: () => {
+      if (lenisInstance) lenisInstance.start();
+    },
+  }));
 
   // ==========================================================================
   // 6. Rooms Filter Engine (Grid + Dropdown Nav Integration)
   // ==========================================================================
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const roomCards = document.querySelectorAll(".room-card");
-
-  const filterRooms = (category) => {
-    const showMoreBtn = document.getElementById('btn-show-more-rooms');
-    const isExpanded = showMoreBtn ? showMoreBtn.classList.contains('expanded') : false;
-
-    roomCards.forEach((card) => {
-      const roomCat = card.getAttribute("data-category");
-      const isHiddenRoom = card.classList.contains('hidden-room');
-      
-      const matchesCategory = (category === "all" || roomCat === category);
-      
-      let shouldShow = false;
-      if (matchesCategory) {
-          if (category === "all" && isHiddenRoom && !isExpanded) {
-              shouldShow = false;
-          } else {
-              shouldShow = true;
-          }
-      }
-
-      if (shouldShow) {
-        card.style.display = 'block';
-        card.classList.remove("hidden");
-
-        // GSAP animation fallback check
-        if (typeof gsap !== "undefined") {
-          gsap.fromTo(
-            card,
-            { opacity: 0, scale: 0.95, y: 15 },
-            {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.4,
-              ease: "power2.out",
-              clearProps: "transform,opacity",
-            },
-          );
-        } else {
-          card.style.opacity = "1";
-        }
-      } else {
-        card.style.display = 'none';
-        card.classList.add("hidden");
-      }
-    });
-
-    const moreBtnContainer = document.querySelector('.rooms-more-container');
-    if (moreBtnContainer) {
-        moreBtnContainer.style.display = 'block';
-    }
-
-    // Highlight active filter pill button
-    filterButtons.forEach((btn) => {
-      if (btn.getAttribute("data-filter") === category) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-  };
-
-
-
-  // Filter pill button clicks
-  filterButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const category = e.target.getAttribute("data-filter");
-      filterRooms(category);
-    });
-  });
+  const filterRooms = MangosUI.initRoomsFilter();
 
   // Dropdown Items Click Event (Scrolls to Rooms & Filters)
   const dropdownItems = document.querySelectorAll(
@@ -1012,65 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 14. Rooms Mobile Carousel Indicator Dots
   // ==========================================================================
-  const initRoomsCarouselDots = () => {
-      const grid = document.getElementById('rooms-grid-container');
-      const dotsContainer = document.getElementById('rooms-carousel-dots');
-      if (!grid || !dotsContainer) return;
-
-      const updateDots = () => {
-          // Count visible room cards
-          const visibleCards = Array.from(grid.querySelectorAll('.room-card')).filter(card => {
-              return window.getComputedStyle(card).display !== 'none';
-          });
-
-          // Re-render dots if count changed
-          if (dotsContainer.children.length !== visibleCards.length) {
-              dotsContainer.innerHTML = '';
-              visibleCards.forEach((card, index) => {
-                  const dot = document.createElement('button');
-                  dot.className = `rooms-carousel-dot ${index === 0 ? 'active' : ''}`;
-                  dot.setAttribute('aria-label', `Ir a habitación ${index + 1}`);
-                  dot.addEventListener('click', () => {
-                      const cardWidth = card.offsetWidth;
-                      const gap = 20; // grid gap
-                      grid.scrollTo({
-                          left: index * (cardWidth + gap),
-                          behavior: 'smooth'
-                      });
-                  });
-                  dotsContainer.appendChild(dot);
-              });
-          }
-
-          // Highlight active dot based on scroll position
-          const scrollLeft = grid.scrollLeft;
-          if (visibleCards.length > 0) {
-              const cardWidth = visibleCards[0].offsetWidth;
-              const gap = 20;
-              const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
-              
-              const dots = dotsContainer.querySelectorAll('.rooms-carousel-dot');
-              dots.forEach((dot, index) => {
-                  if (index === activeIndex) {
-                      dot.classList.add('active');
-                  } else {
-                      dot.classList.remove('active');
-                  }
-              });
-          }
-      };
-
-      grid.addEventListener('scroll', updateDots);
-      window.addEventListener('resize', updateDots);
-
-      // Mutation observer to capture filter updates
-      const observer = new MutationObserver(updateDots);
-      observer.observe(grid, { attributes: true, subtree: true, attributeFilter: ['style', 'class'] });
-
-      updateDots();
-  };
-
-  initRoomsCarouselDots();
+  MangosUI.initRoomsCarouselDots();
 
   // ==========================================================================
   // 15. Mystery Reveal Button Logic (Mobile Only)
@@ -1130,23 +961,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // 16. Room Cards Flip Animation (Tap to Flip)
   // ==========================================================================
-  const initRoomCardFlip = () => {
-      const roomCards = document.querySelectorAll('.room-card');
-      roomCards.forEach(card => {
-          card.addEventListener('click', (e) => {
-              // If they clicked the detail link/button, let it navigate normally
-              if (e.target.closest('.btn-detail-back')) {
-                  return;
-              }
-
-              // Otherwise prevent navigation and flip card
-              e.preventDefault();
-              card.classList.toggle('flipped');
-          });
-      });
-  };
-
-  initRoomCardFlip();
+  MangosUI.initRoomCardFlip();
 
   // Initial filter run to set grid and dots on load
   filterRooms("all");

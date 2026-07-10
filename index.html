@@ -157,7 +157,9 @@
                 <!-- Video Background -->
                 <div class="hero-media-wrapper">
                     <!-- Smooth background video -->
-                    <video autoplay loop muted playsinline class="hero-video" id="hero-background-video">
+                    <video autoplay loop muted playsinline preload="auto" class="hero-video" id="hero-background-video"
+                        data-mobile-src="assets/Video/hero-celular.mp4" data-desktop-src="assets/Video/hero.mp4">
+                        <source src="assets/Video/hero-celular.mp4" type="video/mp4" media="(max-width: 768px)" />
                         <source src="assets/Video/hero.mp4" type="video/mp4" />
                     </video>
                     <div class="hero-overlay"></div>
@@ -950,6 +952,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <!-- Project Script -->
+    <script src="assets/js/common.js"></script>
     <script src="script.js"></script>
 </body>
 
