@@ -49,6 +49,13 @@
       mobileDrawer.classList.remove("open");
       drawerOverlay.classList.remove("open");
       mobileMenuBtn.classList.remove("open");
+      
+      // Close all dropdowns when drawer closes
+      const dropdownContainers = mobileDrawer.querySelectorAll(".drawer-dropdown-container");
+      dropdownContainers.forEach((container) => {
+        container.classList.remove("open");
+      });
+
       if (typeof options.onClose === "function") options.onClose();
     };
 
@@ -62,7 +69,27 @@
 
     drawerCloseBtn.addEventListener("click", close);
     drawerOverlay.addEventListener("click", close);
-    drawerLinks.forEach((link) => link.addEventListener("click", close));
+    
+    // Toggle dropdowns in the drawer
+    const dropdownContainers = mobileDrawer.querySelectorAll(".drawer-dropdown-container");
+    dropdownContainers.forEach((container) => {
+      const title = container.querySelector(".drawer-dropdown-title");
+      if (title) {
+        title.addEventListener("click", (e) => {
+          e.stopPropagation();
+          container.classList.toggle("open");
+        });
+      }
+    });
+
+    drawerLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        // If it's a sublink, it should close the drawer, but if it's the dropdown title itself (which is not a drawer-link), it shouldn't close it
+        if (!link.closest(".drawer-dropdown-title")) {
+          close();
+        }
+      });
+    });
 
     return { open, close };
   };
