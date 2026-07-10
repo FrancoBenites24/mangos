@@ -2055,18 +2055,16 @@ section {
     display: none;
 }
 
-@keyframes sensualPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
-        transform: scale(1);
+@keyframes sensualBlink {
+    0%, 100% {
+        opacity: 0.15;
+        transform: scale(0.92);
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
     }
     50% {
-        box-shadow: 0 0 15px 5px rgba(212, 175, 55, 0.4);
-        transform: scale(1.08);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-        transform: scale(1);
+        opacity: 1;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px 4px rgba(212, 175, 55, 0.4);
     }
 }
 
@@ -2086,8 +2084,7 @@ section {
         justify-content: center;
         z-index: 999;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(7, 21, 48, 0.2);
-        animation: sensualPulse 2s infinite ease-in-out;
+        animation: sensualBlink 2.5s infinite ease-in-out;
     }
 
     /* Hide mystery button when booking bar is expanded */
@@ -2133,6 +2130,8 @@ section {
         transform: none !important;
         padding: 40px 25px 25px 25px !important;
         color: var(--text-deep-blue) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
     
     .hero-content-container.active-mobile .hero-title,
