@@ -2,6 +2,30 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
+  // 0. Theme Toggle Switcher (Default: Dark Mode, Selectable: Light Mode)
+  // ==========================================================================
+  const initThemeToggle = () => {
+      const toggleBtn = document.getElementById('theme-toggle-btn');
+      if (!toggleBtn) return;
+
+      // Check for saved theme preference, default is dark (no class)
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+          document.body.classList.add('light-theme');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('light-theme');
+          if (document.body.classList.contains('light-theme')) {
+              localStorage.setItem('theme', 'light');
+          } else {
+              localStorage.setItem('theme', 'dark');
+          }
+      });
+  };
+  initThemeToggle();
+
+  // ==========================================================================
   // 1. Lenis Smooth Scroll Configuration (Safe Guarded) - Disabled for Native CSS Scroll Snapping
   // ==========================================================================
   let lenisInstance = null;
@@ -620,20 +644,20 @@ document.addEventListener("DOMContentLoaded", () => {
       let activeReveal = false;
 
       // Set initial values
-      container.style.setProperty('--mouse-x', '-9999px');
-      container.style.setProperty('--mouse-y', '-9999px');
-      container.style.setProperty('--spotlight-radius', '0px');
+      heroSection.style.setProperty('--mouse-x', '-9999px');
+      heroSection.style.setProperty('--mouse-y', '-9999px');
+      heroSection.style.setProperty('--spotlight-radius', '0px');
 
       const onMouseMove = (e) => {
           // Only execute if on desktop viewport
           if (window.innerWidth <= 768) return;
 
-          const rect = container.getBoundingClientRect();
+          const rect = heroSection.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
           
-          container.style.setProperty('--mouse-x', `${x}px`);
-          container.style.setProperty('--mouse-y', `${y}px`);
+          heroSection.style.setProperty('--mouse-x', `${x}px`);
+          heroSection.style.setProperty('--mouse-y', `${y}px`);
 
           if (!activeReveal) {
               activeReveal = true;
@@ -645,11 +669,11 @@ document.addEventListener("DOMContentLoaded", () => {
                       duration: 0.8,
                       ease: 'power2.out',
                       onUpdate: () => {
-                          container.style.setProperty('--spotlight-radius', `${spotlight.radius}px`);
+                          heroSection.style.setProperty('--spotlight-radius', `${spotlight.radius}px`);
                       }
                   });
               } else {
-                  container.style.setProperty('--spotlight-radius', '200px');
+                  heroSection.style.setProperty('--spotlight-radius', '200px');
               }
           }
       };
@@ -666,17 +690,17 @@ document.addEventListener("DOMContentLoaded", () => {
                   duration: 0.8,
                   ease: 'power2.out',
                   onUpdate: () => {
-                      container.style.setProperty('--spotlight-radius', `${spotlight.radius}px`);
+                      heroSection.style.setProperty('--spotlight-radius', `${spotlight.radius}px`);
                   },
                   onComplete: () => {
-                      container.style.setProperty('--mouse-x', '-9999px');
-                      container.style.setProperty('--mouse-y', '-9999px');
+                      heroSection.style.setProperty('--mouse-x', '-9999px');
+                      heroSection.style.setProperty('--mouse-y', '-9999px');
                   }
               });
           } else {
-              container.style.setProperty('--spotlight-radius', '0px');
-              container.style.setProperty('--mouse-x', '-9999px');
-              container.style.setProperty('--mouse-y', '-9999px');
+              heroSection.style.setProperty('--spotlight-radius', '0px');
+              heroSection.style.setProperty('--mouse-x', '-9999px');
+              heroSection.style.setProperty('--mouse-y', '-9999px');
           }
       };
 
