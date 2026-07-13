@@ -745,6 +745,13 @@
                                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                     </svg>
                                 </a>
+                                <a href="https://www.tiktok.com/@mangos.suite" target="_blank" rel="noopener"
+                                    aria-label="TikTok">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.19 8.19 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.14z" />
+                                    </svg>
+                                </a>
                                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -937,6 +944,14 @@
                     d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
             </svg>
         </a>
+        <!-- TikTok Link (Small circle) -->
+        <a href="https://www.tiktok.com/@mangos.suite" target="_blank" rel="noopener"
+            class="social-circle-link small-social" id="floating-tiktok" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.19 8.19 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.14z" />
+            </svg>
+        </a>
 
         <!-- WhatsApp Direct Link (Trigger Button) -->
         <a href="https://wa.me/51948282961?text=Hola,%20quisiera%20consultar%20por%20habitaciones%20disponibles"
@@ -958,9 +973,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    <!-- Project Script -->
+    <!-- Project Scripts (Modular Architecture) -->
+    <!-- 1. Shared helpers & UI namespace -->
     <script src="assets/js/common.js"></script>
-    <script src="script.js"></script>
+
+    <!-- 2. Individual feature modules (register on MangosHomePage namespace) -->
+    <script src="assets/js/typewriter.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/stories-slider.js"></script>
+    <script src="assets/js/scroll-animations.js"></script>
+    <script src="assets/js/hero-spotlight.js"></script>
+    <script src="assets/js/services-showcase.js"></script>
+    <script src="assets/js/booking-bar.js"></script>
+    <script src="assets/js/mystery-modal.js"></script>
+
+    <!-- 3. Home page orchestrator (initializes all modules above) -->
+    <script src="assets/js/home-page.js"></script>
 </body>
 
 </html>

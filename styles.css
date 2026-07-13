@@ -1900,6 +1900,13 @@ section {
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* Hide floating social buttons when booking bar is expanded on mobile */
+.floating-actions-container.hidden-by-booking {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(80px);
+}
+
 .social-circle-link.small-social {
     width: 38px;
     height: 38px;
@@ -2223,7 +2230,7 @@ section {
     font-size: 0.8rem;
     font-weight: 500;
     letter-spacing: 0.02em;
-    color: var(--text-deep-blue);
+    color: var(--white);
     outline: none;
     padding: 6px 0;
 }
@@ -2401,9 +2408,9 @@ section {
         bottom: 20px !important;
         left: 20px !important;
         max-width: calc(100vw - 40px) !important;
-        background: rgba(255, 255, 255, 0.96) !important;
+        background: rgba(12, 21, 44, 0.98) !important;
         border: 1px solid rgba(197, 168, 128, 0.25) !important;
-        box-shadow: 0 10px 30px rgba(7, 21, 48, 0.15) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
         align-items: stretch !important;
     }
 
@@ -2413,7 +2420,7 @@ section {
 
     .floating-booking-bar:not(.contracted) .booking-field {
         border-right: none !important;
-        border-bottom: 1px solid rgba(7, 21, 48, 0.05) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
         padding: 4px 0 !important;
         grid-column: span 1 !important;
         margin: 0 !important;
@@ -2614,7 +2621,7 @@ section {
         right: 15px;
         background: transparent;
         border: none;
-        color: var(--text-deep-blue);
+        color: var(--white);
         font-size: 1.8rem;
         cursor: pointer;
         font-weight: 300;
@@ -2878,8 +2885,29 @@ body.light-theme #main-footer {
 }
 
 body.light-theme .room-card-back {
-    background: #071530;
-    color: #ffffff;
+    background: var(--bg-card);
+    color: var(--text-deep-blue);
+    border-color: rgba(7, 21, 48, 0.1);
+    box-shadow: inset 0 0 15px rgba(197, 168, 128, 0.05);
+}
+
+body.light-theme .room-title-back {
+    color: var(--text-deep-blue);
+    border-bottom: 1px solid rgba(7, 21, 48, 0.08);
+}
+
+body.light-theme .room-desc-back {
+    color: var(--text-muted-blue);
+}
+
+body.light-theme .room-amenities-back span {
+    background: rgba(197, 168, 128, 0.08);
+    color: var(--accent-gold-dark);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+}
+
+body.light-theme .room-flip-indicator-back {
+    color: rgba(7, 21, 48, 0.4);
 }
 
 body.light-theme .hero-info-card {
@@ -2922,6 +2950,24 @@ body.light-theme .floating-booking-bar {
 
 body.light-theme .floating-booking-bar .booking-field {
     border-right: 1px solid rgba(7, 21, 48, 0.08);
+}
+
+body.light-theme .floating-booking-bar input,
+body.light-theme .floating-booking-bar select {
+    color: var(--text-deep-blue);
+}
+
+body.light-theme .floating-booking-bar:not(.contracted) {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 10px 30px rgba(7, 21, 48, 0.15) !important;
+}
+
+body.light-theme .floating-booking-bar:not(.contracted) .booking-field {
+    border-bottom: 1px solid rgba(7, 21, 48, 0.08) !important;
+}
+
+body.light-theme .floating-booking-bar:not(.contracted) .booking-close-btn {
+    color: var(--text-deep-blue);
 }
 
 body.light-theme .floating-booking-bar .btn-reservar-bar {
