@@ -130,101 +130,106 @@
             margin-bottom: 40px;
         }
 
-        /* Collapsible Amenities Accordion in Sidebar */
-        .detail-amenities-accordion {
-            margin-top: 25px;
-            background: var(--bg-card);
-            border: 1px solid rgba(197, 168, 128, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        /* Always-visible amenities section */
+        .detail-amenities-section {
+            margin-top: 64px;
+            padding-top: 44px;
+            border-top: 1px solid rgba(197, 168, 128, 0.18);
         }
 
-        .amenities-accordion-toggle {
-            width: 100%;
-            padding: 16px 20px;
-            background: transparent;
-            border: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-headings);
-            font-size: 1rem;
+        .detail-amenities-heading {
+            max-width: 680px;
+            margin-bottom: 28px;
+        }
+
+        .detail-amenities-eyebrow {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-crimson-bright);
+            font-size: 0.72rem;
             font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .detail-amenities-title {
             color: var(--text-deep-blue);
-            cursor: pointer;
-            text-align: left;
-            transition: background-color 0.3s ease;
-        }
-
-        .amenities-accordion-toggle:hover {
-            background-color: rgba(197, 168, 128, 0.05);
-        }
-
-        .accordion-arrow {
-            font-size: 0.8rem;
-            color: var(--accent-gold);
-            transition: transform 0.3s ease;
-        }
-
-        .detail-amenities-accordion.open .accordion-arrow {
-            transform: rotate(180deg);
-        }
-
-        .amenities-accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background-color: var(--bg-warm-white);
-        }
-
-        .detail-amenities-accordion.open .amenities-accordion-content {
-            max-height: 800px;
-            border-top: 1px solid rgba(197, 168, 128, 0.15);
+            font-family: var(--font-headings);
+            font-size: clamp(1.65rem, 3vw, 2.2rem);
+            font-weight: 600;
+            line-height: 1.2;
         }
 
         .detail-amenities-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
         }
 
         .amenity-card {
-            background-color: var(--bg-card);
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(197, 168, 128, 0.12);
+            min-height: 205px;
+            padding: 26px 22px;
+            background: var(--bg-card);
+            border: 1px solid rgba(197, 168, 128, 0.16);
+            border-radius: 2px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .amenity-icon-dot {
-            width: 8px;
-            height: 8px;
+        .amenity-card:nth-last-child(2):nth-child(4n + 1) {
+            grid-column: 2;
+        }
+
+        .amenity-card:hover {
+            border-color: var(--accent-crimson-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+        }
+
+        .amenity-icon {
+            width: 54px;
+            height: 54px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(214, 34, 70, 0.45);
             border-radius: 50%;
-            background-color: var(--accent-gold);
+            color: var(--accent-crimson-bright);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
+        }
+
+        .amenity-icon svg {
+            width: 24px;
+            height: 24px;
         }
 
         .amenity-card-info {
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
         .amenity-card-name {
-            font-size: 0.88rem;
-            font-weight: 600;
+            margin: 0;
             color: var(--text-deep-blue);
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.35;
         }
 
         .amenity-card-desc {
-            font-size: 0.75rem;
+            max-width: 22ch;
+            margin: 6px 0 0;
             color: var(--text-muted-blue);
-            opacity: 0.8;
+            font-size: 0.8rem;
             font-weight: 300;
-            margin-top: 2px;
+            line-height: 1.5;
         }
 
         /* Right Column: Sticky Sidebar Column */
@@ -381,15 +386,43 @@
                 position: relative;
                 top: 0;
             }
+
+            .detail-amenities-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .amenity-card:nth-last-child(2):nth-child(4n + 1) {
+                grid-column: auto;
+            }
         }
 
         @media (max-width: 600px) {
+            .detail-amenities-section {
+                margin-top: 48px;
+                padding-top: 34px;
+            }
+
             .detail-amenities-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .amenity-card {
+                min-height: 176px;
             }
 
             .detail-title {
                 font-size: 2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .amenity-card {
+                transition: none;
+            }
+
+            .amenity-card:hover {
+                transform: none;
             }
         }
     </style>
@@ -572,20 +605,21 @@
                             </div>
                         </div>
 
-                        <!-- Collapsible Amenities & Services Accordion -->
-                        <div class="detail-amenities-accordion">
-                            <button class="amenities-accordion-toggle" id="amenities-toggle-btn">
-                                <span>Comodidades y Servicios Incluidos</span>
-                                <span class="accordion-arrow">▼</span>
-                            </button>
-                            <div class="amenities-accordion-content" id="amenities-content-pane">
-                                <div class="detail-amenities-grid" id="detail-amenities-container">
-                                    <!-- Rendered dynamically -->
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
+                <!-- Always-visible Amenities & Services -->
+                <section class="detail-amenities-section" aria-labelledby="detail-amenities-title">
+                    <div class="detail-amenities-heading">
+                        <span class="detail-amenities-eyebrow">Todo incluido en tu estadía</span>
+                        <h2 class="detail-amenities-title" id="detail-amenities-title">
+                            Comodidades y Servicios Incluidos
+                        </h2>
+                    </div>
+                    <div class="detail-amenities-grid" id="detail-amenities-container" role="list">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </section>
             </div>
         </section>
 
@@ -685,3 +719,4 @@
 </body>
 
 </html>
+
