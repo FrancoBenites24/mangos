@@ -98,6 +98,36 @@ const ROOMS_DETAILS = {
   },
 };
 
+const AMENITY_ICONS = {
+  screen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"></rect><path d="m8 2 4 4 4-4"></path></svg>',
+  bed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M22 10v10M2 16h20M6 10h12a4 4 0 0 1 4 4v2H2v-2a4 4 0 0 1 4-4Z"></path><path d="M6 10V7h5a3 3 0 0 1 3 3"></path></svg>',
+  wellness: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4 0 7-3.2 7-7.1 0-3.1-1.8-5.7-5-8.9.2 2.4-.7 4.2-2.4 5.6.1-3.6-1.6-6.7-4.2-9.1.2 4.1-2.4 6.3-2.4 10.7C5 18.1 7.9 22 12 22Z"></path></svg>',
+  car: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M5 17h14M7 17v2M17 17v2M5 12h14"></path><circle cx="7" cy="14.5" r="1"></circle><circle cx="17" cy="14.5" r="1"></circle></svg>',
+  connectivity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"></path><circle cx="12" cy="20" r="1"></circle><path d="M2 9a14 14 0 0 1 20 0"></path></svg>',
+  ambience: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"></path><path d="M8.2 14.7A6 6 0 1 1 15.8 14.7C14.7 15.5 14 16.4 14 18h-4c0-1.6-.7-2.5-1.8-3.3Z"></path></svg>',
+  service: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3Z"></path><path d="M12 14v7M9 21h6"></path></svg>',
+  climate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.2 6.5l15.6 11M19.8 6.5l-15.6 11M8 4l4 4 4-4M8 20l4-4 4 4M3.5 10l5.5 1.5-1.5 5.5M20.5 14l-5.5-1.5 1.5-5.5"></path></svg>',
+  default: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>',
+};
+
+function getAmenityIcon(name) {
+  const normalizedName = name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  if (/tv|proyector/.test(normalizedName)) return AMENITY_ICONS.screen;
+  if (/cama|sillon/.test(normalizedName)) return AMENITY_ICONS.bed;
+  if (/sauna|jacuzzi|ducha/.test(normalizedName)) return AMENITY_ICONS.wellness;
+  if (/cochera/.test(normalizedName)) return AMENITY_ICONS.car;
+  if (/wifi|sonido|bluetooth/.test(normalizedName)) return AMENITY_ICONS.connectivity;
+  if (/luz|espejo|decoracion/.test(normalizedName)) return AMENITY_ICONS.ambience;
+  if (/bar|bebida|carta|ventanilla/.test(normalizedName)) return AMENITY_ICONS.service;
+  if (/aire|climatizacion/.test(normalizedName)) return AMENITY_ICONS.climate;
+
+  return AMENITY_ICONS.default;
+}
+
 MangosUI.ready(() => {
   MangosUI.initThemeToggle();
   MangosUI.initMobileDrawer();
@@ -146,15 +176,28 @@ MangosUI.ready(() => {
   const amenitiesContainer = document.getElementById("detail-amenities-container");
   amenitiesContainer.innerHTML = "";
   data.amenities.forEach((amenity) => {
-    const card = document.createElement("div");
+    const card = document.createElement("article");
     card.className = "amenity-card";
-    card.innerHTML = `
-      <div class="amenity-icon-dot"></div>
-      <div class="amenity-card-info">
-        <span class="amenity-card-name">${amenity.name}</span>
-        <span class="amenity-card-desc">${amenity.desc}</span>
-      </div>
-    `;
+    card.setAttribute("role", "listitem");
+
+    const icon = document.createElement("span");
+    icon.className = "amenity-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.innerHTML = getAmenityIcon(amenity.name);
+
+    const info = document.createElement("div");
+    info.className = "amenity-card-info";
+
+    const name = document.createElement("h3");
+    name.className = "amenity-card-name";
+    name.textContent = amenity.name;
+
+    const description = document.createElement("p");
+    description.className = "amenity-card-desc";
+    description.textContent = amenity.desc;
+
+    info.append(name, description);
+    card.append(icon, info);
     amenitiesContainer.appendChild(card);
   });
 
@@ -179,11 +222,5 @@ MangosUI.ready(() => {
     });
   }
 
-  const amenitiesToggle = document.getElementById("amenities-toggle-btn");
-  const amenitiesAccordion = document.querySelector(".detail-amenities-accordion");
-  if (amenitiesToggle && amenitiesAccordion) {
-    amenitiesToggle.addEventListener("click", () => {
-      amenitiesAccordion.classList.toggle("open");
-    });
-  }
 });
+
