@@ -178,17 +178,10 @@
             justify-content: center;
             text-align: center;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
-            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .amenity-card:nth-last-child(2):nth-child(4n + 1) {
             grid-column: 2;
-        }
-
-        .amenity-card:hover {
-            border-color: var(--accent-crimson-bright);
-            transform: translateY(-3px);
-            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
         }
 
         .amenity-icon {
@@ -416,15 +409,6 @@
             }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .amenity-card {
-                transition: none;
-            }
-
-            .amenity-card:hover {
-                transform: none;
-            }
-        }
     </style>
 </head>
 
